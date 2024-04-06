@@ -1,8 +1,8 @@
 import './App.css'
 import { Routes,Route } from 'react-router-dom'
-import Login from './Pages/Login'
-import Register from './Pages/Register'
-import Broadcast from './Pages/Broadcast'
+import Login from './Pages/LoginPages/Login'
+import Register from './Pages/LoginPages/Register'
+import Broadcast from './Pages/Broadcasts/Broadcast'
 
 function App() {
 

@@ -5,28 +5,17 @@ import { AiOutlineLock } from "react-icons/ai";
 
 const Register = () => {
     useEffect(() => {
-        const emailInput = document.getElementById('email');
-        const emailLabel = document.querySelector('label[for="email"]');
-        const passwordInput = document.getElementById('password');
-        const passwordLabel = document.querySelector('label[for="password"]');
-        
-        emailInput.addEventListener('input', event => {
-            if (event.target.value) {
-                emailInput.classList.add('border-blue-600', 'border-b-2');
-                emailLabel.classList.add('text-xs', '-top-5', 'text-blue-200');
-            } else {
-                emailInput.classList.remove('border-blue-600', 'border-b-2');
-                emailLabel.classList.remove('text-xs', '-top-5', 'text-blue-200');
-            }
-        });
+        const TextInput = document.getElementById('Text');
+        const TextLabel = document.querySelector('label[for="Text"]');
 
-        passwordInput.addEventListener('input', event => {
+        
+        TextInput.addEventListener('input', event => {
             if (event.target.value) {
-                passwordInput.classList.add('border-blue-600', 'border-b-2');
-                passwordLabel.classList.add('text-xs', '-top-5', 'text-blue-200');
+                TextInput.classList.add('border-blue-600', 'border-b-2');
+                TextLabel.classList.add('text-xs', '-top-4', 'text-blue-200');
             } else {
-                passwordInput.classList.remove('border-blue-600', 'border-b-2');
-                passwordLabel.classList.remove('text-xs', '-top-5', 'text-blue-200');
+                TextInput.classList.remove('border-blue-600', 'border-b-2');
+                TextLabel.classList.remove('text-xs', '-top-4', 'text-blue-200');
             }
         });
     }, []);
@@ -38,30 +27,30 @@ const Register = () => {
                     <div className="relative my-6">
                         <div className="w-72">
                             <input type="text" 
-                                id="email" 
+                                id="Text" 
                                 className="border-b w-72 py-1 focus:outline-none focus:border-blue-600 focus:border-b-2 bg-transparent transition-colors peer duration-200" 
                                 autoComplete="off"/>
-                            <label htmlFor="email" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Email</label>
+                            <label htmlFor="Text" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Email</label>
                             <BiUser className="absolute top-2 right-4"/>
                         </div>
                     </div>
                     <div className="relative my-6">
                         <div className="w-72">
                             <input type="password" 
-                                id="password" 
+                                id="Text" 
                                 className="block border-b w-72 py-1 focus:outline-none focus:border-blue-600 focus:border-b-2 bg-transparent transition-colors peer duration-200" 
                                 autoComplete="off"/>
-                            <label htmlFor="password" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Password</label>
+                            <label htmlFor="Text" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Password</label>
                             <AiOutlineLock className="absolute top-2 right-4"/>
                         </div>
                     </div>
                     <div className="relative my-6">
                         <div className="w-72">
                             <input type="password" 
-                                id="password" 
+                                id="Text" 
                                 className="block border-b w-72 py-1 focus:outline-none focus:border-blue-600 focus:border-b-2 bg-transparent transition-colors peer duration-200" 
                                 autoComplete="off"/>
-                            <label htmlFor="password" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Confirm Password</label>
+                            <label htmlFor="Text" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Confirm Password</label>
                             <AiOutlineLock className="absolute top-2 right-4"/>
                         </div>
                     </div>
