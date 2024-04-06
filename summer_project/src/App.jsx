@@ -1,14 +1,16 @@
 import './App.css'
 import { Routes,Route } from 'react-router-dom'
-import Login from './Components/LoginForm/Login'
-import Register from './Components/RegisterForm/RegisterForm'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+import Broadcast from './Pages/Broadcast'
 
 function App() {
 
 
   return (
-    <div className='text-white h-screen flex justify-center items-center bg-cover' style={{"backgroundImage" : "url('../src/assets/background.jpg')"}}>
+    <div>
       <Routes>
+        <Route path='Broadcast' element={<Broadcast/>}/>
         <Route path='login' element={<Login/>}/>
         <Route path='register' element={<Register/>}/>
       </Routes>
