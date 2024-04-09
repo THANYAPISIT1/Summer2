@@ -1,11 +1,11 @@
 import Sidebar from "../../Components/Layouts/Sidebar";
-import TopNav from "../../Components/Layouts/TopNav";
+import BroadCastList from "./BroadcastList";
 
 const Broadcast = () =>{
     return(
         <div className="flex ">
-            <TopNav className="width-full"/>
             <Sidebar />
+            <BroadCastList />
         </div>
     );
 };
