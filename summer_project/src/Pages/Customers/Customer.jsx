@@ -16,6 +16,15 @@ const Customer = () => {
     setEmail('champ489245@gmail.com');
   }, []);
 
+  const levelColors = {
+     
+    'Silver': 'bg-custom-silver',
+    'Gold': 'bg-custom-yellow',
+    'Platinum': 'bg-custom-platinum',
+    'Diamond': 'bg-custom-diamond',
+  };
+
+
   return (
     <div className='ml-64'>
          
@@ -32,7 +41,7 @@ const Customer = () => {
           <div className='pl-5'>
             <div className='flex '>
               <p className='font-medium font-sans text-xl rounded pl-4 pr-2 content-center'>{name}</p>
-            <div className='content-center  text-xs border rounded-full bg-custom-yellow px-1 '>{level}</div>
+             <div className={`content-center text-xs border rounded-xl px-2 ${levelColors[level] || 'bg-gray-400'}`}>{level}</div>
             </div>
             <div className='flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5 '><h4>Email:</h4><p className='font-medium font-sans text-sm rounded pl-1'>{email}</p></div></div>  
         </div>

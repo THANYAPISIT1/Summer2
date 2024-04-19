@@ -10,6 +10,9 @@ export default {
        colors: {
         'custom-blue': '#0085FF', 
         'custom-yellow': '#FFE455',
+        'custom-silver': '#BAB4B4',
+        'custom-platinum': '#34A0B4',
+        'custom-diamond': '#D678FF',
       },
       borderRadius: {
         custom: '13px',
