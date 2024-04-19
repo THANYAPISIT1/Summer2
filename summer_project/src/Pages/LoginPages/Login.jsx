@@ -54,7 +54,7 @@ const LoginForm = () => {
                     <button className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white py-2 transition-colors duration-300" type="submit">Login</button>
                     <div className="">
                         <span className="m-4" >New Here? <Link className="text-blue-300" to='/register'>Create an Account</Link></span>
-                    </div>ttttttttt
+                    </div>
                 </form>
             </div>
         </div>
