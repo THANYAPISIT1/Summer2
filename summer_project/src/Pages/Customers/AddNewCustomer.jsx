@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import '../CustomerCss/AddNC.css'
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
+
+
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
@@ -35,10 +34,10 @@ function AddNewCustomer() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className='ml-64'>
-      <h2>Add New Customer</h2>
-      <label htmlFor="name" className='name'>Name</label>
-      <input
+    <form onSubmit={handleSubmit} className='ml-64 flex flex-col gap-2.5 p-5'>
+      <h2 className='font-bold font-sans text-2xl'>Add New Customer</h2>
+      <label htmlFor="name" className='flex border border-gray-200 rounded-xl font-bold font-sans text-base'>Name</label>
+      <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         type="text"
         id="name"
         name="name"
@@ -47,10 +46,10 @@ function AddNewCustomer() {
       />
 
         <div className="mb-4">
-        <label className="block text-black text-sm font-bold mb-2" htmlFor="level">
+        <label className="block text-black font-bold font-sans text-base mb-2 " htmlFor="level">
           Level:
         </label>
-        <select
+        <select 
           id="level"
           name="level"
           value={level}
@@ -64,8 +63,8 @@ function AddNewCustomer() {
         </select>
       </div>
 
-      <label htmlFor="email" className='email'>Email</label>
-      <input
+      <label htmlFor="email" className='flex border border-gray-200 rounded-xl font-bold font-sans text-base'>Email</label>
+      <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         type="email"
         id="email"
         name="email"
@@ -73,8 +72,8 @@ function AddNewCustomer() {
         onChange={(event) => setEmail(event.target.value)}
       />
 
-      <label htmlFor="description" className='description'>Description</label>
-      <textarea
+      <label htmlFor="description" className='flex border border-gray-200 rounded-xl font-bold font-sans text-base'>Description</label>
+      <textarea className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         id="description"
         name="description"
         value={description}
