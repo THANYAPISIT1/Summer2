@@ -1,0 +1,68 @@
+
+
+
+
+.edit-button{
+    background-color: #0085FF;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.delete-button{
+    background-color: #F44336;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.detail{
+    background-color: #fff;
+}
+
+
+
+
+
+.name, .email, .level{
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 1rem;
+    
+}
+
+.StatLevel{
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 1rem;
+    display: flex;
+    gap: 10px;
+    
+}
+
+.Status-level {
+    border: 1px ;
+    border-radius: 5px;
+    background-color: #FFE455;
+    padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.status-name, .status-email {
+    font-weight: medium;
+    font-family: sans-serif;
+    font-size: 0.813rem;
+   
+    border-radius: 5px;
+    padding: 1px 1px 1px 15px;
+    margin-right: 50%;
+}
+
+.name, .email, .status-name, .status-email {
+    padding-bottom: 10px;
+}

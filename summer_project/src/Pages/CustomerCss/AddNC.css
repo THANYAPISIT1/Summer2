@@ -1,0 +1,53 @@
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.name .email .description {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+}
+
+h2 {
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 1.5rem;
+}
+
+label {
+    font-weight: bold;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+button {
+    padding: 10px 15px;
+    border: #000;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.button-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+
+
+.save {
+    background-color: #007bff;
+    color: #fff;
+}
