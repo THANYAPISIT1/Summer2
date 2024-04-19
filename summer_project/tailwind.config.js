@@ -6,7 +6,15 @@ export default {
     "./node_modules/tailwind-datepicker-react/dist/**/*.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+       colors: {
+        'custom-blue': '#0085FF', 
+        'custom-yellow': '#FFE455',
+      },
+      borderRadius: {
+        custom: '13px',
+      },
+    },
   },
   plugins: [],
   variants: {
