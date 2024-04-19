@@ -36,7 +36,7 @@ const Customer = () => {
             </div>
             <div className='flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5 '><h4>Email:</h4><p className='font-medium font-sans text-sm rounded pl-1'>{email}</p></div></div>  
         </div>
-        <Link to="/DetailandEdit"><button className='bg-green-600 text-white text-xl no-underline py-2 px-4 rounded-custom cursor-pointer '>Detail</button></Link>
+        <Link to="/DetailAndEdit"><button className='bg-green-600 text-white text-xl no-underline py-2 px-4 rounded-custom cursor-pointer '>Detail</button></Link>
        </div>
     
     </div>
