@@ -1,0 +1,21 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.add-button {
+    background-color: #0085FF;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 13px;
+    cursor: pointer;
+}
