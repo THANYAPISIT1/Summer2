@@ -1,5 +1,4 @@
-import Select from 'react-select';
-import React from 'react';
+import Select from 'react-select'
 // import handleChange from 
 
 // const handleChange = (selectOption) =>{
@@ -8,29 +7,28 @@ import React from 'react';
 
 const Filter = () => {
     const tags = [
-        {label:'Silver', value:'silver'}
+        {label:'Silver', value:'silver'},
+        {label:'Gold', value:'Gold'},
+        {label:'Platinum', value:'Platinum'}
 
     ];
     
     return(
         <div>
-            testttttttttttt
-                <div className="flex flex-row">
-                    <select name="" id="" className="w-64 mx-4 my-6 text-center border-solid border-2 border-gray-900 p-3 rounded-md">
-                        <option value="Test1">All Newsletter</option>
-                        <option value="Test2">Test2</option>
-                        <option value="Test3">Test3</option>
-                        <option value="Test4">Test4</option>
-                    </select>
-                    
-                    
-                    <Select options={tags} onChange={handleChange} isMulti className="w-64 mx-4 my-6 text-center border-solid border-2 border-gray-900 p-3 rounded-md"/>
-                    <select name="" id="" className="w-64 mx-4 my-6 text-center border-solid border-2 border-gray-900 p-3 rounded-md">
-                        <option value="Test1">Last updated</option>
-                        <option value="Test2">Test2</option>
-                        <option value="Test3">Test3</option>
-                        <option value="Test4">Test4</option>
-                    </select>
+            <div className="flex flex-row">
+                <select className="select select-bordered w-full max-w-xs my-4 mx-4">
+                    <option>Who shot first?</option>
+                    <option>Han Solo</option>
+                    <option>Greedo</option>
+                </select>
+                
+                <Select options={tags} isMulti className="basic-multi-select my-4 h-12 min-h-12 w-full max-w-xs"/>
+
+                <select className="select select-bordered w-full max-w-xs my-4 mx-4">
+                    <option>Who shot first?</option>
+                    <option>Han Solo</option>
+                    <option>Greedo</option>
+                </select>
             </div>
         </div>
     );
