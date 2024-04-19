@@ -1,8 +1,8 @@
 import  { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import '../CustomerCss/Detail.css'
 
-function DetailandEdit() {
+
+function DetailAndEdit() {
   
     
   const [name, setName] = useState('');
@@ -51,4 +51,4 @@ function DetailandEdit() {
   )
 }
 
-export default DetailandEdit
+export default DetailAndEdit
