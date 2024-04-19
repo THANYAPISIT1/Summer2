@@ -14,6 +14,7 @@ const Filter = () => {
     
     return(
         <div>
+            testttttttttttt
                 <div className="flex flex-row">
                     <select name="" id="" className="w-64 mx-4 my-6 text-center border-solid border-2 border-gray-900 p-3 rounded-md">
                         <option value="Test1">All Newsletter</option>
