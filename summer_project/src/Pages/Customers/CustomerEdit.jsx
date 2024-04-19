@@ -8,7 +8,7 @@ function CustomerEdit() {
   const [level, setLevel] = useState('');
   const [newName, setNewName] = useState('Champ');
   
-
+  
    
 
   useEffect(() => {
@@ -89,7 +89,7 @@ function CustomerEdit() {
           name="level"
           value={level}
           onChange={handleChange}
-          className="shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+          className="shadow  border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
         >
           <option value="silver">Silver</option>
           <option value="gold">Gold</option>
