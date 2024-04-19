@@ -1,10 +1,15 @@
 import {FaSearch,FaBell,FaUserCircle} from 'react-icons/fa'
+import { Link } from 'react-router-dom';
 
 const TopNav = () => {
 
 
     return (
-        <nav className=" bg-gray-800 px-4 py-3 flex justify-end ml-64">
+        <nav className="fixed top-0 right-0 left-0 bg-gray-800 px-4 py-3 flex justify-between">
+            <div className='my-3 mb-4 ml-3 text-white font-bold'>
+                <h1 className="text">BroadCast</h1>
+            </div>
+            <hr /> 
             <div className='flex items-center gap-x-5'>
                 <div className='relative md:w-65'>
                     <span className='relative md:absolute insert-y-0 left-0 flex items-center pl-2'>
@@ -18,9 +23,9 @@ const TopNav = () => {
                         <FaUserCircle className='w-6 h-6 mt-1'/>
                         <div className='z-10 hidden absolute bg-white rouded-lg shadow w-32 group-focus:block top-full right-0'>
                             <ul className='py-2 text-sm text-gray-950'>
-                                <li><a href="">Profile</a></li>
-                                <li><a href="">Setting</a></li>
-                                <li><a href="">Log out</a></li>
+                                <li><Link to=''>Profile</Link></li>
+                                <li><Link to=''>Setting</Link></li>
+                                <li><Link to=''>Log out</Link></li>
                             </ul>
                         </div>
                     </button>

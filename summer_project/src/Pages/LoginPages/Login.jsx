@@ -33,7 +33,7 @@ const LoginForm = () => {
                             <label htmlFor="Text" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Email</label>
                             <BiUser className="absolute top-2 right-4"/>
                         </div>
-                    </div>
+                    </div>iiiiiiiiiiii
                     <div className="relative my-6">
                         <div className="w-72">
                             <input type="password" 
@@ -50,7 +50,7 @@ const LoginForm = () => {
                             <label htmlFor="Remember Me">Remember Me</label>
                         </div>
                         <Link className="text-blue-300">Forgot Password?</Link> 
-                    </div>uuuuuuuuu
+                    </div>
                     <button className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white py-2 transition-colors duration-300" type="submit">Login</button>
                     <div className="">
                         <span className="m-4" >New Here? <Link className="text-blue-300" to='/register'>Create an Account</Link></span>
