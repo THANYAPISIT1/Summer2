@@ -1,13 +1,28 @@
 import {FaSearch,FaBell,FaUserCircle} from 'react-icons/fa'
-import { Link } from 'react-router-dom';
+import { Link,useLocation  } from 'react-router-dom';
 
 const TopNav = () => {
+
+    const location = useLocation();
+
+    // Function to get the page name from the path
+    const getPageName = () => {
+        const path = location.pathname;
+        // If the path is just "/", return "Broadcast"
+        if (path === "/") {
+            return "Broadcast";
+        } else {
+            // Split the path and get the last part (page name)
+            const parts = path.split('/');
+            return parts[parts.length - 1];
+        }
+    };
 
 
     return (
         <nav className="fixed top-0 right-0 left-0 bg-gray-800 px-4 py-3 flex justify-between">
             <div className='my-3 mb-4 ml-3 text-white font-bold'>
-                <h1 className="text">BroadCast</h1>
+                <h1 className="text">{getPageName().toUpperCase()}</h1>
             </div>
             <hr /> 
             <div className='flex items-center gap-x-5'>

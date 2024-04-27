@@ -33,7 +33,7 @@ const LoginForm = () => {
                             <label htmlFor="Text" className="absolute left-0 top-1 cursor-text focus:text-xs peer-focus:text-xs peer-focus:-top-4 peer-focus:text-blue-200 transition-all duration-200">Email</label>
                             <BiUser className="absolute top-2 right-4"/>
                         </div>
-                    </div>iiiiiiiiiiii
+                    </div>
                     <div className="relative my-6">
                         <div className="w-72">
                             <input type="password" 
