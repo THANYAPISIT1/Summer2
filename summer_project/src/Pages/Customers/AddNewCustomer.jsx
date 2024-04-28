@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-
-
+import TopNav from '../../Components/Layouts/TopNav';
+import Sidebar from '../../Components/Layouts/Sidebar';
 
 
 function AddNewCustomer() {
@@ -34,7 +34,11 @@ function AddNewCustomer() {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit} className='ml-64 flex flex-col gap-2.5 p-5'>
+    <div>
+      <TopNav />
+      <Sidebar />
+      <div className='ml-64 mt-16 py-3'>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
       <h2 className='font-bold font-sans text-2xl mb-4'>Add New Customer</h2>
       <label htmlFor="name" className='flex font-bold font-sans text-base'>Name</label>
       <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
@@ -96,6 +100,8 @@ function AddNewCustomer() {
      
       
     </form>
+      </div>
+    </div>
   );
 }
 

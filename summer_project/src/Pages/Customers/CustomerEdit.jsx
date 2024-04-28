@@ -1,6 +1,7 @@
 import  { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
+import TopNav from '../../Components/Layouts/TopNav';
+import Sidebar from '../../Components/Layouts/Sidebar';
 
 function CustomerEdit() {
   const [name, setName] = useState('Champ');
@@ -45,12 +46,15 @@ function CustomerEdit() {
   
 
   return (
-    <div className="flex flex-col  ml-64">
-      <div className='flex justify-between items-center py-4 px-4 pl-16 bg-write-200 border-b border-gray-400'>
+    <div>
+      <TopNav />
+      <Sidebar />
+      <div className="flex flex-col  ml-64 mt-16 py-3">
+      <div className='flex justify-between items-center py-4 px-4 pl-16 bg-write-200 border-b border-gray-200'>
         <h2 className=' text-black font-bold text-xl'>{newName}</h2>
-        <Link><button onClick={handleSubmit} className='bg-blue-600 text-white no-underline py-2 px-4 rounded-custom cursor-pointer'>Save</button></Link>
+        <Link><button onClick={handleSubmit} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Save</button></Link>
       </div>
-      <div className='mx-9 py-4 px-4 pl-8 border-b border-l border-r border-gray-400 '>
+      <div className='mx-9 py-4 px-4 pl-8 border-b border-l border-r border-gray-200 '>
         <div>
         <div className="mb-4">
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
@@ -100,6 +104,7 @@ function CustomerEdit() {
       </div>
       </div>
       
+    </div>
     </div>
   );
 }
