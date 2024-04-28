@@ -3,6 +3,7 @@ import Sidebar from "../../Components/Layouts/Sidebar";
 import { useState } from "react";
 import { IoPencil } from "react-icons/io5";
 
+
 const BCRecipients = () => {
 
     const [broadcastName, setBroadcastName] = useState("Name of Broadcast"); // State to store the broadcast name
@@ -146,6 +147,7 @@ return (
                     </div>
                 </div>
             )}
+
         </div>
     );  
 };

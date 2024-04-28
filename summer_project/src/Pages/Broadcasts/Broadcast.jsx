@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
 
 
-
 const Broadcast = () => {
 
     return (
@@ -23,7 +22,7 @@ const Broadcast = () => {
                         </Link>
                     </div>
                     <hr />
-                    <Filter/>
+                    <Filter />
                     <hr />
                     {/* content */}
 
@@ -50,6 +49,7 @@ const Broadcast = () => {
                                     <BsThreeDots />
                                 </button>
                             </div>
+
                         </div>
                     </div>
                     {/* ---------------------- */}

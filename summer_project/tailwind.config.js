@@ -7,7 +7,18 @@ export default {
     'node_modules/preline/dist/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+       colors: {
+        'custom-blue': '#0085FF', 
+        'custom-yellow': '#FFE455',
+        'custom-silver': '#BAB4B4',
+        'custom-platinum': '#34A0B4',
+        'custom-diamond': '#D678FF',
+      },
+      borderRadius: {
+        custom: '13px',
+      },
+    },
   },
   plugins: [
     require('preline/plugin'),

@@ -2,6 +2,7 @@ import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
 
 
+
 const customStyles = {
   control: base => ({
     ...base,
@@ -9,13 +10,15 @@ const customStyles = {
     borderRadius: '0.375rem', 
     minHeight: 'calc(2.25rem + 2px)', 
     boxShadow: 'none', 
+
   }),
 };
 
 const Filter = () => {
     const tags = [
-        {label:'Silver', value:'silver'}
-
+        {label:'Silver', value:'silver'},
+        {label:'Gold', value:'Gold'},
+        {label:'Platinum', value:'Platinum'}
     ];
 
     const AllNewsletter = [
@@ -35,11 +38,14 @@ const Filter = () => {
     ];
     console.log(LastUpdate);
       
+
     
     return(
+
         <div>
             <div className="flex flex-row">
                 {/* <select className="select select-bordered w-full max-w-fit my-4 mx-4 px-2 border border-#d1d5db rounded-md">
+
                     <option>All Newsletter</option>
                     <option>Draft</option>
                     <option>Sent</option>
@@ -50,15 +56,19 @@ const Filter = () => {
 
                 <Select 
                      placeholder={<div>Select Tags</div>}
+
                     options={tags} 
                     isMulti 
                     className="basic-multi-select my-4 w-full max-w-64"
                     styles={customStyles} // Apply custom styles
                 />
 
+
                 <CreatableSelect  placeholder={<div>Filter</div>} isClearable styles={customStyles} className="my-4 w-full max-w-64 mx-4" options={LastUpdate} />
+
             </div>
         </div>
+        
     );
 };
 
