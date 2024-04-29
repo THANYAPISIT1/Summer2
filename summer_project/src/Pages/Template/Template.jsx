@@ -1,7 +1,5 @@
-import React from "react";
 import Sidebar from "../../Components/Layouts/Sidebar.jsx";
 import TopNav from "../../Components/Layouts/TopNav.jsx";
-import Editor from "../../Components/Layouts/Editor.jsx";
 import { Link } from 'react-router-dom';
 
 
