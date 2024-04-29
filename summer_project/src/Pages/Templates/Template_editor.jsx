@@ -2,7 +2,7 @@ import Sidebar from "../../Components/Layouts/Sidebar.jsx";
 import TopNav from "../../Components/Layouts/TopNav.jsx";
 import Editor from "../../Components/Layouts/Editor.jsx";
 
-export default function Template_editor() {
+const Template_editor = () => {
   return (
     <div >
       <Sidebar />
@@ -11,3 +11,5 @@ export default function Template_editor() {
       </div>
   );
 };
+
+export default Template_editor;

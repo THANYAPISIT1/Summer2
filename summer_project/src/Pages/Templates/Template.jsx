@@ -2,8 +2,7 @@ import Sidebar from "../../Components/Layouts/Sidebar.jsx";
 import TopNav from "../../Components/Layouts/TopNav.jsx";
 import { Link } from 'react-router-dom';
 
-
-export default function Template() {
+const Template = () => {
   return (
     <div >
       <Sidebar />
@@ -27,3 +26,6 @@ export default function Template() {
 
   );
 };
+
+
+export default Template;
