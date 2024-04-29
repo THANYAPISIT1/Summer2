@@ -2,12 +2,12 @@ import Sidebar from "../../Components/Layouts/Sidebar.jsx";
 import TopNav from "../../Components/Layouts/TopNav.jsx";
 import { Link } from 'react-router-dom';
 
-
 const Template = () => {
   return (
     <div >
       <TopNav />
       <Sidebar />
+
       <div className="ml-64">Let’s create your template</div>
       <div>
       <div className="border-2 text-black flex flex-row">
