@@ -40,7 +40,7 @@ const TopNav = () => {
                             <ul className='py-2 text-sm text-gray-950'>
                                 <li><Link to=''>Profile</Link></li>
                                 <li><Link to=''>Setting</Link></li>
-                                <li><Link to=''>Log out</Link></li>
+                                <li><Link to='/login'>Log out</Link></li>
                             </ul>
                         </div>
                     </button>

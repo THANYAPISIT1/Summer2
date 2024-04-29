@@ -1,6 +1,10 @@
 module.exports = {
   root: true,
+<<<<<<< Updated upstream
   env: { browser: true, node:true ,es2020: true },
+=======
+  env: { browser: true, node: true ,es2020: true },
+>>>>>>> Stashed changes
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',

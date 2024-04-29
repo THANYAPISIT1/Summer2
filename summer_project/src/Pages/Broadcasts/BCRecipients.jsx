@@ -79,7 +79,7 @@ return (
 
                             {/* ---------------------------------- */}
                             <div className="inline-flex">
-                                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded-l text-sm">
+                                <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded-l text-sm cursor-not-allowed">
                                     Prev
                                 </button>
                                 <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded-r text-sm">

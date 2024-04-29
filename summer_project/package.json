@@ -16,6 +16,7 @@
     "@mui/base": "^5.0.0-beta.40",
     "@mui/material": "^5.15.15",
     "date-fns": "^3.6.0",
+    "dayjs": "^1.11.11",
     "preline": "^2.1.0",
 
     "react": "^18.2.0",
@@ -24,6 +25,7 @@
     "react-icons": "^5.0.1",
     "react-router-dom": "^6.22.3",
     "react-select": "^5.8.0",
+    "react-tailwindcss-datepicker": "^1.6.6",
     "tailwind-datepicker-react": "^1.4.3"
   },
   "devDependencies": {

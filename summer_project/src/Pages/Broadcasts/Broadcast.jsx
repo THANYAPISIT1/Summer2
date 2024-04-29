@@ -7,6 +7,11 @@ import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
 
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 const Broadcast = () => {
 
     return (
