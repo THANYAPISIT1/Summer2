@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 const Template = () => {
   return (
     <div >
-      <Sidebar />
       <TopNav />
+      <Sidebar />
+
       <div className="ml-64">Let’s create your template</div>
       <div>
       <div className="border-2 text-black flex flex-row">
@@ -26,6 +27,5 @@ const Template = () => {
 
   );
 };
-
 
 export default Template;

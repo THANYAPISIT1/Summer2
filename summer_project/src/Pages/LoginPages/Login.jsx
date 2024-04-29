@@ -20,7 +20,7 @@ const LoginForm = () => {
         });
     }, []);
     return (
-        <div className='text-white h-screen flex justify-center items-center bg-cover' style={{"backgroundImage" : "url('../src/assets/background.jpg')"}}>
+        <div className='text-white h-screen flex justify-center items-center bg-cover'  style={{"backgroundImage" : "url('../src/assets/background.jpg')"}}>
             <div className="bg-slate-800 border border-slate-400 rounded-md p-8 shadow-lg background-filter backdrop-blur-sm bg-opacity-30 relative">
                 <h1 className="text-4xl text-white fornt-black text-center mb-6">Login</h1>
                 <form action="">
@@ -65,7 +65,9 @@ const LoginForm = () => {
                         </div>
                         <Link className="text-blue-300">Forgot Password?</Link> 
                     </div>
-                    <button className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white py-2 transition-colors duration-300" type="submit">Login</button>
+                    <Link to='/'>
+                        <button className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white py-2 transition-colors duration-300" type="submit">Login</button>
+                    </Link>
                     <div className="">
                         <span className="m-4" >New Here? <Link className="text-blue-300" to='/register'>Create an Account</Link></span>
                     </div>
