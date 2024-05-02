@@ -21,16 +21,7 @@ function CustomerEdit() {
   ];
    
 
-  useEffect(() => {
-    const storedData = localStorage.getItem('profileData');
-    if (storedData) {
-      const { name, email, level } = JSON.parse(storedData);
-      setName(name);
-      setEmail(email);
-      setLevel(level);
-    }
-  }, []);
-
+  
   const handleChange = (selectedOption) => {
     setLevel(selectedOption.value);
   };
@@ -48,9 +39,15 @@ function CustomerEdit() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('New customer added:', { name, level, email });
-    localStorage.setItem('profileData', JSON.stringify({ name, email, level }));
+    setName('');
+    setLevel('');
+    setEmail('');
     navigate('/customers');
   };
+
+  useEffect(() => {
+    console.log('Component mounted or updated');
+  }, []);
   
 
   return (
