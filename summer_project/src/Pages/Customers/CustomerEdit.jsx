@@ -1,5 +1,5 @@
 import  { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
@@ -9,6 +9,7 @@ function CustomerEdit() {
   const [name, setName] = useState('Champ');
   const [email, setEmail] = useState('champ489245@gmail.com');
   const [level, setLevel] = useState('');
+  const history = useNavigate();
   
   
   
@@ -48,6 +49,7 @@ function CustomerEdit() {
     event.preventDefault();
     console.log('New customer added:', { name, level, email });
     localStorage.setItem('profileData', JSON.stringify({ name, email, level }));
+    history('/customers');
   };
   
 
