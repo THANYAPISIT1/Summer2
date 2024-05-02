@@ -9,7 +9,7 @@ function CustomerEdit() {
   const [name, setName] = useState('Champ');
   const [email, setEmail] = useState('champ489245@gmail.com');
   const [level, setLevel] = useState('');
-  const history = useNavigate();
+  const navigate = useNavigate();
   
   
   
@@ -49,7 +49,7 @@ function CustomerEdit() {
     event.preventDefault();
     console.log('New customer added:', { name, level, email });
     localStorage.setItem('profileData', JSON.stringify({ name, email, level }));
-    history('/customers');
+    navigate('/customers');
   };
   
 
