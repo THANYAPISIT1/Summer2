@@ -4,7 +4,7 @@ import Login from "./Pages/LoginPages/Login";
 import Register from "./Pages/LoginPages/Register";
 import Broadcast from "./Pages/Broadcasts/Broadcast";
 import Customer from "./Pages/Customers/Customer";
-
+/*import DetailAndEdit from "./Pages/Customers/DetailandEdit"; */
 import AddNewCustomer from "./Pages/Customers/AddNewCustomer";
 import Template from "./Pages/Templates/Template";
 import Template_editor from "./Pages/Templates/Template_editor";

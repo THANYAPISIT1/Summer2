@@ -31,7 +31,8 @@ const Filter = () => {
     const tags = [
         {label:'Silver', value:'silver'},
         {label:'Gold', value:'Gold'},
-        {label:'Platinum', value:'Platinum'}
+        {label:'Platinum', value:'Platinum'},
+        {label:'Diamond', value:'Diamond'}
     ];
 
     const AllNewsletter = [
