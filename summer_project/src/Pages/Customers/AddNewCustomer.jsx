@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
-
+import { useNavigate } from 'react-router-dom';
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
   const [description, setDescription] = useState('');
+  const history = useNavigate();
 
   const levelOptions = [
     { value: 'Silver', label: 'Silver' },
@@ -28,6 +29,7 @@ function AddNewCustomer() {
     setLevel('');
     setEmail('');
     setDescription('');
+    history("/customers");
   };
 
   const handleReset = (event) => {
