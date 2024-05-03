@@ -1,17 +1,27 @@
 import { useState, useEffect } from 'react';
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
-
+import Select from 'react-select';
+import { useNavigate } from 'react-router-dom';
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
   const [description, setDescription] = useState('');
+  const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    setLevel(event.target.value);
+  const levelOptions = [
+    { value: 'Silver', label: 'Silver' },
+    { value: 'Gold', label: 'Gold' },
+    { value: 'Platinum', label: 'Platinum' },
+    { value: 'Diamond', label: 'Diamond' },
+  ];
+
+  const handleChange = (selectedOption) => {
+    setLevel(selectedOption.value);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('New customer added:', { name, level, email, description });
@@ -19,6 +29,7 @@ function AddNewCustomer() {
     setLevel('');
     setEmail('');
     setDescription('');
+    navigate("/customers");
   };
 
   const handleReset = (event) => {
@@ -49,22 +60,17 @@ function AddNewCustomer() {
         onChange={(event) => setName(event.target.value)}
       />
 
-        <div className="mb-4">
-        <label className="block text-black font-bold font-sans text-base mb-2 " htmlFor="level">
+        <div >
+        <label className="block text-black font-bold font-sans text-base  " htmlFor="level">
           Level:
         </label>
-        <select 
-          id="level"
-          name="level"
-          value={level}
-          onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        >
-          <option value="Silver">Silver</option>
-          <option value="Gold">Gold</option>
-          <option value="Platinum">Platinum</option>
-          <option value="Diamond">Diamond</option>
-        </select>
+        <Select
+                placeholder="Select level"
+                options={levelOptions}
+                value={levelOptions.find((option) => option.value === level)}
+                onChange={handleChange}
+                className="basic-multi-select my-4 w-full max-w-64"
+              />
       </div>
 
       <label htmlFor="email" className='flex  font-bold font-sans text-base'>Email</label>
@@ -97,8 +103,6 @@ function AddNewCustomer() {
       </button>
         </div>
       </div>
-     
-      
     </form>
       </div>
     </div>

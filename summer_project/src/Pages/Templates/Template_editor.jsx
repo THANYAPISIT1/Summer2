@@ -3,6 +3,7 @@ import TopNav from "../../Components/Layouts/TopNav.jsx";
 import Editor from "../../Components/Layouts/Editor.jsx";
 import Navbar from "../../Components/Layouts/Navbar.jsx";
 
+
 const Template_editor = () => {
   return (
     <div >

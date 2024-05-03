@@ -1,6 +1,7 @@
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-
+import { useState } from 'react';
+import Datepicker from "react-tailwindcss-datepicker"; 
 
 
 const customStyles = {
@@ -15,10 +16,23 @@ const customStyles = {
 };
 
 const Filter = () => {
+
+    const [value, setValue] = useState({ 
+        startDate: new Date(), 
+        endDate: new Date().setMonth(11) 
+        }); 
+        
+        const handleValueChange = (newValue) => {
+        console.log("newValue:", newValue); 
+        setValue(newValue); 
+        } 
+
+
     const tags = [
         {label:'Silver', value:'silver'},
         {label:'Gold', value:'Gold'},
-        {label:'Platinum', value:'Platinum'}
+        {label:'Platinum', value:'Platinum'},
+        {label:'Diamond', value:'Diamond'}
     ];
 
     const AllNewsletter = [
@@ -44,15 +58,13 @@ const Filter = () => {
 
         <div>
             <div className="flex flex-row">
-                {/* <select className="select select-bordered w-full max-w-fit my-4 mx-4 px-2 border border-#d1d5db rounded-md">
-
-                    <option>All Newsletter</option>
-                    <option>Draft</option>
-                    <option>Sent</option>
-                    <option>Scheduled</option>
-                </select> */}
 
                 <CreatableSelect  placeholder={<div>Type</div>} isClearable styles={customStyles} className="my-4 w-full max-w-64 mx-4" options={AllNewsletter} />
+                
+                <Datepicker 
+                    value={value} 
+                    onChange={handleValueChange} 
+                /> 
 
                 <Select 
                      placeholder={<div>Select Tags</div>}
