@@ -9,7 +9,7 @@ function AddNewCustomer() {
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
   const [description, setDescription] = useState('');
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const levelOptions = [
     { value: 'Silver', label: 'Silver' },
@@ -29,7 +29,7 @@ function AddNewCustomer() {
     setLevel('');
     setEmail('');
     setDescription('');
-    history("/customers");
+    navigate("/customers");
   };
 
   const handleReset = (event) => {
