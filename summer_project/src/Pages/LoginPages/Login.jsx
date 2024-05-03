@@ -20,7 +20,7 @@ const LoginForm = () => {
     //     });
     // }, []);
     return (
-        <div className='text-white h-screen flex justify-center items-center bg-cover'  style={{"backgroundImage" : "url('../../public/background.jpg')"}}>
+        <div className='text-white h-screen flex justify-center items-center bg-cover'  style={{"backgroundImage" : "url('../..//background.jpg')"}}>
             <div className="bg-slate-800 border border-slate-400 rounded-md p-8 shadow-lg background-filter backdrop-blur-sm bg-opacity-30 relative">
                 <h1 className="text-4xl text-white fornt-black text-center mb-6">Login</h1>
                 <form action="">

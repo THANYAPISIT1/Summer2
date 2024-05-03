@@ -58,13 +58,6 @@ const Filter = () => {
 
         <div>
             <div className="flex flex-row">
-                {/* <select className="select select-bordered w-full max-w-fit my-4 mx-4 px-2 border border-#d1d5db rounded-md">
-
-                    <option>All Newsletter</option>
-                    <option>Draft</option>
-                    <option>Sent</option>
-                    <option>Scheduled</option>
-                </select> */}
 
                 <CreatableSelect  placeholder={<div>Type</div>} isClearable styles={customStyles} className="my-4 w-full max-w-64 mx-4" options={AllNewsletter} />
                 
