@@ -69,7 +69,7 @@ function AddNewCustomer() {
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
-                className="basic-multi-select my-4 w-full max-w-64"
+                className="basic-multi-select mt-2.5 w-max"
               />
       </div>
 
