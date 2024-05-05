@@ -32,8 +32,8 @@ const Customer = () => {
         <Sidebar />
       <div className='ml-64 mt-16 py-3'>
 
-          <header className="flex justify-between items-center bg-white text-black text-3xl font-bold pl-8 px-2 py-4 mb-8 border-b border-gray-200 ">
-            <h2>Customers</h2>
+          <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-8 border-b border-gray-200 ">
+            <h2 className="text-black text-xl">Customers</h2>
             <Link to="/customer/add" ><button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Add new customer</button></Link>
             
           </header>
