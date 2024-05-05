@@ -50,7 +50,7 @@ function AddNewCustomer() {
       <Sidebar />
       <div className='ml-64 mt-16 py-3'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
-      <h2 className='font-bold font-sans text-2xl mb-4'>Add New Customer</h2>
+      <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
       <label htmlFor="name" className='flex font-bold font-sans text-base'>Name</label>
       <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         type="text"
@@ -98,7 +98,7 @@ function AddNewCustomer() {
       </button>
         </div>
         <div className='flex gap-2'>
-          <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold  py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Save
       </button>
         </div>
