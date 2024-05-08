@@ -11,6 +11,13 @@ function DetailAndEdit() {
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
   
+  const levelColors = {
+     
+    'Silver': 'bg-custom-silver',
+    'Gold': 'bg-custom-yellow',
+    'Platinum': 'bg-custom-platinum',
+    'Diamond': 'bg-custom-diamond',
+  };
 
    useEffect(() => {
     setName('Champ');
@@ -47,7 +54,7 @@ function DetailAndEdit() {
             <p className='font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5'>{name}</p>
             <h4 className='font-bold font-sans text-base pb-2.5'>Email :</h4>
             <p className='font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5'>{email}</p>
-            <div className='font-bold font-sans text-base flex gap-2.5'><h4 className='font-bold font-sans text-base'>Level :</h4><div className='border rounded bg-custom-yellow px-2'>{level}</div></div>
+            <div className='font-bold font-sans text-base flex gap-2.5'><h4 className='font-bold font-sans text-base'>Level :</h4><div className={`content-center text-xs border rounded-xl px-2 ${levelColors[level] || 'bg-black'}`}>{level}</div></div>
             </div>
             
           </div>
