@@ -74,7 +74,7 @@ function CustomerEdit() {
                 Name:
               </label>
               <input
-                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
+                className="shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
                 id="name"
                 type="text"
                 placeholder="Name"
@@ -91,7 +91,7 @@ function CustomerEdit() {
                 Email:
               </label>
               <input
-                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
+                className="shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
                 id="email"
                 type="email"
                 placeholder="Email"

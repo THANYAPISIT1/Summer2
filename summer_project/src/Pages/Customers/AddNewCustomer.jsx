@@ -50,31 +50,35 @@ function AddNewCustomer() {
       <Sidebar />
       <div className='ml-64 mt-16 py-3'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
+
       <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
-      <label htmlFor="name" className='flex font-bold font-sans text-base'>Name</label>
-      <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
+      <div className='flex  gap-2.5'>
+        <div className='basis-1/2'>
+          <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
+      <input className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full'
         type="text"
         id="name"
         name="name"
         value={name}
         onChange={(event) => setName(event.target.value)}
       />
-
-        <div >
-        <label className="block text-black font-bold font-sans text-base  " htmlFor="level">
-          Level:
+        </div>
+        <div className='ml-2.5'>
+        <label className="text-black font-bold font-sans text-base  " htmlFor="level">
+          Level
         </label>
         <Select
-                placeholder="Select level"
+                placeholder="Select Level"
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
-                className="basic-multi-select mt-2.5 w-max"
+                className="basic-multi-select mt-2.5 w-max "
               />
+      </div>
       </div>
 
       <label htmlFor="email" className='flex  font-bold font-sans text-base'>Email</label>
-      <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
+      <input className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2'
         type="email"
         id="email"
         name="email"
@@ -83,7 +87,7 @@ function AddNewCustomer() {
       />
 
       <label htmlFor="description" className='flex  font-bold font-sans text-base'>Description</label>
-      <textarea className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
+      <textarea className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  h-32'
         id="description"
         name="description"
         value={description}
@@ -91,17 +95,18 @@ function AddNewCustomer() {
       />
 
       
-      <div className='flex gap-2'>
-         <div className='flex gap-2'>
-          <button onClick={handleReset} className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Cancel
-      </button>
-        </div>
-        <div className='flex gap-2'>
+      <div className='flex flex-row-reverse gap-4 mt-4'>
+         <div className=''>
           <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold  py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Save
       </button>
         </div>
+         <div className=''>
+          <button onClick={handleReset} className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Cancel
+      </button>
+        </div>
+       
       </div>
     </form>
       </div>
