@@ -7,6 +7,7 @@ import Filter from '../../Components/BCList/Filter';
 import Createbtn from '../../Components/BCList/Createbtn';
 import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
+import { Pagination } from "@nextui-org/react";
 
 const Broadcast = () => {
     const [broadcasts, setBroadcasts] = useState([]);
@@ -36,7 +37,7 @@ const Broadcast = () => {
         };
 
         fetchBroadcasts();
-    }, []);
+    }, [currentPage]);
 
     // Function to format date to "dd/mm/yyyy hh:mm"
     const formatDate = (dateString) => {
@@ -50,18 +51,22 @@ const Broadcast = () => {
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     };
 
+    const handlePaginationChange = (page) => {
+        setCurrentPage(page);
+    };
+
     return (
-        <div>
-            <TopNav/>
-            <Sidebar/>  
+        <div className='relative'>
+            <TopNav />
+            <Sidebar />  
             <div className='mt-16'>
                 <section className="ml-64">
-                    <div className='flex justify-between'>
-                        <div className="text-xl p-8 font-bold ">BroadCast</div>
+                    <header className='flex justify-between static'>
+                        <div className="text-xl p-8 font-bold">Broadcast</div>
                         <Link to='/broadcast/recipients' className='mt-4'>
                             <Createbtn className='mr-4 border mt-8 h-10 items-center w-40 p-2 rounded-md text-blue-600 hover:bg-blue-500 hover:text-white' />
                         </Link>
-                    </div>
+                    </header>
                     <hr />
                     <Filter />
                     <hr />
@@ -73,18 +78,24 @@ const Broadcast = () => {
                                     <div>
                                         <h2 className="font-bold text-violet-700">{broadcast.BName}</h2>
                                         <p>
-                                            Tag : {broadcast.BTag}<br />
-                                            Create by : {broadcast.BUpdate}
+                                            Tag: {broadcast.BTag}<br />
+                                            Created by: {broadcast.BUpdate}
                                         </p>
                                     </div>
                                 </div>
-                                <div>
+                                <div className='absolute left-1/2'>
                                     <span className='bg-gray-200 py-2 px-3 rounded-lg text-xs'>{broadcast.BStatus}</span>
                                 </div>
                                 <div>
-                                    <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
-                                        Massage has been sent 
-                                    </button>
+                                    {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Scheduled' ? (
+                                        <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
+                                            Can edit
+                                        </button>
+                                    ) : (
+                                        <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
+                                            Message has been sent 
+                                        </button>
+                                    )}
                                     <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
                                         <BsThreeDots />
                                     </button>
@@ -93,6 +104,14 @@ const Broadcast = () => {
                         </div>
                     ))}
                 </section>
+                <footer className='ml-64 flex justify-center mt-8 my-8'>
+                    <Pagination
+                        className=''
+                        total={totalPages}
+                        current={currentPage}
+                        onChange={handlePaginationChange}
+                    />
+                </footer>
             </div>
         </div>
     );
