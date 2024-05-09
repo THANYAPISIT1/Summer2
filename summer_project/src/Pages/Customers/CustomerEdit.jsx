@@ -45,6 +45,11 @@ function CustomerEdit() {
     navigate('/customers');
   };
 
+  const handleDelete = () => {
+    
+    console.log('Deleting user...')
+  }
+
   useEffect(() => {
     console.log('Component mounted or updated');
   }, []);
@@ -57,12 +62,15 @@ function CustomerEdit() {
       <div className="flex flex-col ml-64 mt-16 py-3">
         <div className="flex justify-between items-center py-4 px-4 pl-16 bg-write-200 border-b border-gray-200">
           <h2 className="text-black font-bold text-xl">{name}</h2>
+          <div className='flex gap-2'>
+            <button className='bg-red-500 hover:bg-red-700 text-white no-underline py-2 px-4 rounded-custom cursor-pointer' onClick={handleDelete}>Delete</button>
           <Link><button
             onClick={handleSubmit}
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Save
           </button></Link>
+          </div>
         </div>
         <div className="mx-9 py-4 px-4 pl-8 border-b border-l border-r border-gray-200">
           <form onSubmit={handleSubmit}>

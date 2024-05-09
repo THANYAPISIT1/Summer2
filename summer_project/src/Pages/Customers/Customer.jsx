@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import Select from 'react-select';
 import { useState, useEffect } from 'react'
 import { IoPersonOutline } from "react-icons/io5";
 import TopNav from '../../Components/Layouts/TopNav';
@@ -17,6 +18,24 @@ const Customer = () => {
     setEmail('champ489245@gmail.com');
   }, []);
 
+  const customStyles = {
+  control: base => ({
+    ...base,
+    border: '1px solid #d1d5db',
+    borderRadius: '0.375rem', 
+    minHeight: 'calc(2.25rem + 2px)', 
+    boxShadow: 'none', 
+
+  }),
+};
+
+  const tags = [
+        {label:'Silver', value:'silver'},
+        {label:'Gold', value:'Gold'},
+        {label:'Platinum', value:'Platinum'},
+        {label:'Diamond', value:'Diamond'}
+    ];
+
   const levelColors = {
      
     'Silver': 'bg-custom-silver',
@@ -32,11 +51,21 @@ const Customer = () => {
         <Sidebar />
       <div className='ml-64 mt-16 py-3'>
 
-          <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-8 border-b border-gray-200 ">
+          <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-4 border-b border-gray-200 ">
             <h2 className="text-black text-xl">Customers</h2>
             <Link to="/customer/add" ><button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Add new customer</button></Link>
             
           </header>
+          <div className='border-b border-gray-200 mb-8'>
+            <Select 
+                     placeholder={<div>Select Tags</div>}
+
+                    options={tags} 
+                    isMulti 
+                    className="basic-multi-select my-4 w-full max-w-64 mx-4"
+                    styles={customStyles} // Apply custom styles
+                />
+          </div>
         <div className=' shadow-xl hover:bg-opacity-75 rounded-xl  flex justify-between items-center  px-4 py-2 ml-6 mr-16 '>
           <div className='flex '>
             <div>
