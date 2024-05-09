@@ -8,6 +8,7 @@ import Createbtn from '../../Components/BCList/Createbtn';
 import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
 
+
 const Broadcast = () => {
     const [broadcasts, setBroadcasts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -16,7 +17,12 @@ const Broadcast = () => {
     useEffect(() => {
         const fetchBroadcasts = async () => {
             try {
-                const response = await axios.get('http://localhost:8000/broadcasts-test');
+                const authToken = localStorage.getItem('token')
+                const response = await axios.get('http://localhost:8000/broadcasts',{
+                    headers:{
+                        'authorization' : `Bearer ${authToken}`
+                    }
+                });
                 console.log(response.data);
                 
                 const data = response.data;

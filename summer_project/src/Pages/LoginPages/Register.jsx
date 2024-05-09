@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from "react-router-dom";
+import { validateEmail, validateUsername, validatePassword } from "../validator/adminValidator"
+
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -9,7 +11,9 @@ const Register = () => {
         APassword: ''
     });
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState('');
+    const navigate = useNavigate();
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,9 +22,25 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const { AEmail, AUsername, APassword} = formData;
+        if (!validateEmail(AEmail)) {
+            setErrors('Email must include @.');
+            return;
+        }
+    
+        if (validateUsername(AUsername) !== true) {
+            setErrors(validateUsername(AUsername));
+            return;
+        }
+    
+        if (!validatePassword(APassword) !== true) {
+            setErrors(validatePassword(APassword));
+            return;
+        }
 
         try {
             const response = await axios.post('http://localhost:8000/register', formData);
+            
             console.log(response.data);
 
             // Reset form after successful registration
@@ -32,11 +52,13 @@ const Register = () => {
 
             // Redirect to login page after successful registration
             // You can implement this logic based on your routing setup
-            // history.push('/login');
+            navigate('/login');
         } catch (error) {
             if (error.response && error.response.data) {
                 setErrors(error.response.data);
             }
+
+            return
         }
     };
 
@@ -105,7 +127,7 @@ const Register = () => {
                             </label>
                         </div>
                     </div>
-                    {errors.message && <div className="text-red-500 mt-1">{errors.message}</div>}
+                    {errors && <div className="text-red-500 mt-1">{errors}</div>}
                     <button className="w-full mb-4 text-[18px] mt-2 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white py-2 transition-colors duration-300" type="submit">Register</button>
                     <div className="">
                         <span className="m-4">Already have an Account? <Link className="text-blue-300" to='/login'>Sign in</Link></span>

@@ -17,15 +17,15 @@ function App() {
     <div>
       <Routes>
         <Route path="/Template_editor" element={<Template_editor />} />
-        <Route path="/Template" element={<Template />} />
+        <Route path="/Templates" element={<Template />} />
         <Route path="test" element={<TestingGround />} />
-        <Route path="/" element={<Broadcast />} />
-        <Route path="broadcast/recipients" element={<BCRecipients />} />
+        <Route path="/broadcasts" element={<Broadcast />} />
+        <Route path="broadcasts/recipients" element={<BCRecipients />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="customers" element={<Customer />} />
-        <Route path="customer/edit" element={<CustomerEdit />} />
-        <Route path="customer/add" element={<AddNewCustomer />} />
+        <Route path="customers/edit" element={<CustomerEdit />} />
+        <Route path="customers/add" element={<AddNewCustomer />} />
         {/* <Route path="customer/detail" element={<DetailAndEdit />} /> */}
       </Routes>
     </div>
