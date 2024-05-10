@@ -6,7 +6,8 @@ import { IoPeople } from "react-icons/io5";
 import { IoDocumentSharp } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
 import BroadcastNameModal from "../../Components/BCList/BroadcastNameModal";
-import { Link } from "react-router-dom";
+import Btn from "../../Components/Input_btn/Btn";
+// import { Link } from "react-router-dom";
 // import { Link, Button } from "@nextui-org/react";
 
 
@@ -69,7 +70,9 @@ const BCReview = () =>{
                             </ol>
 
                             {/* ---------------------------------- */}
-                            <div className="inline-flex">
+
+                            <Btn/>
+                            {/* <div className="inline-flex">
                                 <Link to='/broadcast/content'>
                                     <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-3 rounded-l text-sm">
                                         Prev
@@ -79,7 +82,7 @@ const BCReview = () =>{
                                     Next
                                 </button>
 
-                            </div>
+                            </div> */}
                         </div>
                     </header>
                     <hr />
