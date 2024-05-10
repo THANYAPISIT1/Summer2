@@ -13,31 +13,35 @@ const Broadcast = () => {
     const [broadcasts, setBroadcasts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const fetchBroadcasts = async () => {
-            try {
-                const response = await axios.get('http://localhost:8000/broadcasts-test');
-                console.log(response.data);
-                
-                const data = response.data;
-                
-                // Format BUpdate date before setting the broadcasts state
-                const formattedBroadcasts = data.broadcasts.map(broadcast => ({
-                    ...broadcast,
-                    BUpdate: formatDate(broadcast.BUpdate)
-                }));
-
-                setBroadcasts(formattedBroadcasts);
-                setCurrentPage(data.currentPage);
-                setTotalPages(data.totalPages);
-            } catch (error) {
-                console.error('Error fetching broadcasts:', error);
-            }
-        };
-
-        fetchBroadcasts();
+        fetchBroadcasts(currentPage);
     }, [currentPage]);
+
+    const fetchBroadcasts = async (page) => {
+        setLoading(true);
+        try {
+            const response = await axios.get(`http://localhost:8000/broadcasts-test?page=${page}`);
+            const data = response.data;
+
+            // Format BUpdate date before setting the broadcasts state
+            const formattedBroadcasts = data.broadcasts.map(broadcast => ({
+                ...broadcast,
+                BUpdate: formatDate(broadcast.BUpdate)
+            }));
+
+            setBroadcasts(formattedBroadcasts);
+            setCurrentPage(page);
+            setTotalPages(data.totalPages);
+        } catch (error) {
+            console.error('Error fetching broadcasts:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
 
     // Function to format date to "dd/mm/yyyy hh:mm"
     const formatDate = (dateString) => {
@@ -51,8 +55,10 @@ const Broadcast = () => {
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     };
 
-    const handlePaginationChange = (page) => {
-        setCurrentPage(page);
+
+    
+    const handlePaginationChange = async (page) => {
+        fetchBroadcasts(page);
     };
 
     return (
@@ -70,48 +76,57 @@ const Broadcast = () => {
                     <hr />
                     <Filter />
                     <hr />
-                    {broadcasts.map(broadcast => (
-                        <div key={broadcast.BID} className="mx-4 my-4">
-                            <div className="flex justify-between mx-auto p-4 border border-gray-300 rounded-md">
-                                <div className='flex'>
-                                    <FaFileAlt className="h-8 my-3 ml-2 mr-4"/>
+
+
+                    {loading ? (
+                        <></>
+                    ) : (
+                        broadcasts.map(broadcast => (
+                            <div key={broadcast.BID} className="mx-4 my-4">
+                                <div className="flex justify-between mx-auto p-4 border border-gray-300 rounded-md">
+                                    <div className='flex'>
+                                        <FaFileAlt className="h-8 my-3 ml-2 mr-4"/>
+                                        <div>
+                                            <h2 className="font-bold text-violet-700">{broadcast.BName}</h2>
+                                            <p>
+                                                Tag: {broadcast.BTag}<br />
+                                                Created by: {broadcast.BUpdate}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className='absolute left-1/2'>
+                                        <span className='bg-gray-200 py-2 px-3 rounded-lg text-xs'>{broadcast.BStatus}</span>
+                                    </div>
                                     <div>
-                                        <h2 className="font-bold text-violet-700">{broadcast.BName}</h2>
-                                        <p>
-                                            Tag: {broadcast.BTag}<br />
-                                            Created by: {broadcast.BUpdate}
-                                        </p>
+                                        {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Scheduled' ? (
+                                            <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
+                                                Can edit
+                                            </button>
+                                        ) : (
+                                            <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
+                                                Message has been sent 
+                                            </button>
+                                        )}
+                                        <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
+                                            <BsThreeDots />
+                                        </button>
                                     </div>
                                 </div>
-                                <div className='absolute left-1/2'>
-                                    <span className='bg-gray-200 py-2 px-3 rounded-lg text-xs'>{broadcast.BStatus}</span>
-                                </div>
-                                <div>
-                                    {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Scheduled' ? (
-                                        <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
-                                            Can edit
-                                        </button>
-                                    ) : (
-                                        <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
-                                            Message has been sent 
-                                        </button>
-                                    )}
-                                    <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
-                                        <BsThreeDots />
-                                    </button>
-                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))
+                    )}
                 </section>
                 <footer className='ml-64 flex justify-center mt-8 my-8'>
                     <Pagination
+                        isCompact 
+                        showControls 
                         className=''
                         total={totalPages}
-                        current={currentPage}
+                        initialPage={currentPage}
                         onChange={handlePaginationChange}
                     />
                 </footer>
+
             </div>
         </div>
     );

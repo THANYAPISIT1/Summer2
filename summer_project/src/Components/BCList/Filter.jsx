@@ -1,7 +1,6 @@
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { useState } from 'react';
-import Datepicker from "react-tailwindcss-datepicker"; 
+import {DateRangePicker} from "@nextui-org/react";
 
 
 const customStyles = {
@@ -17,15 +16,6 @@ const customStyles = {
 
 const Filter = () => {
 
-    const [value, setValue] = useState({ 
-        startDate: new Date(), 
-        endDate: new Date().setMonth(11) 
-        }); 
-        
-        const handleValueChange = (newValue) => {
-        console.log("newValue:", newValue); 
-        setValue(newValue); 
-        } 
 
 
     const tags = [
@@ -61,14 +51,13 @@ const Filter = () => {
 
                 <CreatableSelect  placeholder={<div>Type</div>} isClearable styles={customStyles} className="my-4 w-full max-w-64 mx-4" options={AllNewsletter} />
                 
-                <Datepicker 
-                    value={value} 
-                    onChange={handleValueChange} 
-                /> 
+                <DateRangePicker 
+                    className="my-4 w-full max-w-64 mx-4" 
+                    styles={customStyles}
+                />
 
                 <Select 
-                     placeholder={<div>Select Tags</div>}
-
+                    placeholder={<div>Select Tags</div>}
                     options={tags} 
                     isMulti 
                     className="basic-multi-select my-4 w-full max-w-64"
