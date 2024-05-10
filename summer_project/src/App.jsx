@@ -10,6 +10,8 @@ import Template from "./Pages/Templates/Template";
 import Template_editor from "./Pages/Templates/Template_editor";
 import CustomerEdit from "./Pages/Customers/CustomerEdit";
 import BCRecipients from "./Pages/Broadcasts/BCRecipients";
+import BCContent from "./Pages/Broadcasts/BCContent";
+import BCReview from "./Pages/Broadcasts/BCReview";
 import TestingGround from "./TestingGround";
 
 function App() {
@@ -21,6 +23,8 @@ function App() {
         <Route path="test" element={<TestingGround />} />
         <Route path="/" element={<Broadcast />} />
         <Route path="broadcast/recipients" element={<BCRecipients />} />
+        <Route path="broadcast/content" element={<BCContent />} />
+        <Route path="broadcast/review" element={<BCReview />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="customers" element={<Customer />} />

@@ -1,7 +1,7 @@
 import { RiBroadcastLine } from "react-icons/ri";
 import { GoRepoTemplate } from "react-icons/go";
 import { HiOutlineArrowsRightLeft } from "react-icons/hi2";
-import { IoPeople } from "react-icons/io5";
+import { BsPeople } from "react-icons/bs";
 import { IoPeopleCircleSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const Sidebar = () => {
                 <li className='my-2 rounded hover:shadow hover:bg-gray-300 py-2'>
                     <Link to='/template' className='px-3'>
                         <GoRepoTemplate className='inline-block w-6 h-6 mr-2 -mt-2 ' />
-                        <span><Link to='/Template'>Template</Link></span>
+                        <span>Template</span>
                     </Link>
                 </li>
                 <hr />
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 <hr />
                 <li className='my-2 rounded hover:shadow hover:bg-gray-300 py-2'>
                     <Link to='/customers' className='px-3'>
-                        <IoPeople className='inline-block w-6 h-6 mr-2 -mt-2 '/>
+                        <BsPeople className='inline-block w-6 h-6 mr-2 -mt-2 '/>
                         Customers
                     </Link>
                 </li>
