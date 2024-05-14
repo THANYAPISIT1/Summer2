@@ -11,11 +11,19 @@ import Template_editor from "./Pages/Templates/Template_editor";
 import CustomerEdit from "./Pages/Customers/CustomerEdit";
 import BCRecipients from "./Pages/Broadcasts/BCRecipients";
 import TestingGround from "./TestingGround";
+import Admin from "./Pages/Admin/Admin";
+import AddNewAdmin from "./Pages/Admin/DetailandEditAdmin";
+import AdminEdit from "./Pages/Admin/AdminEdit";
+import DetailAndEditAdmin from "./Pages/Admin/DetailandEditAdmin";
 
 function App() {
   return (
     <div>
       <Routes>
+        <Route path="DetailAndEditAdmin" element={<DetailAndEditAdmin />} />
+        <Route path="/AdminEdit" element={<AdminEdit />} />
+        <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
+        <Route path="/Admin" element={<Admin />} />
         <Route path="/Template_editor" element={<Template_editor />} />
         <Route path="/Template" element={<Template />} />
         <Route path="test" element={<TestingGround />} />
