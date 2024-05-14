@@ -8,7 +8,7 @@ import Select from 'react-select';
 function CustomerEdit() {
   const [name, setName] = useState('Champ');
   const [email, setEmail] = useState('champ489245@gmail.com');
-  const [level, setLevel] = useState('');
+  const [level, setLevel] = useState('Gold');
   const navigate = useNavigate();
   
   
@@ -116,7 +116,7 @@ function CustomerEdit() {
                 Level:
               </label>
               <Select
-                placeholder="Select level"
+                placeholder={level}
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
