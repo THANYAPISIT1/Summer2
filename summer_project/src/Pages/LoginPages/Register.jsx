@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link,useNavigate } from "react-router-dom";
-import { validateEmail, validateUsername, validatePassword } from "../validator/adminValidator"
-
+import { validateEmail ,validateUsername, validatePassword } from '../validator/adminValidator';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -11,7 +10,7 @@ const Register = () => {
         APassword: ''
     });
 
-    const [errors, setErrors] = useState('');
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
     
 
@@ -22,19 +21,20 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const { AEmail, AUsername, APassword} = formData;
-        if (!validateEmail(AEmail)) {
-            setErrors('Email must include @.');
+        const {AEmail, AUsername, APassword} = formData;
+
+        if (validateEmail(AEmail) !== true) {
+            setErrors({ message: validateEmail(AEmail) });
+            return;
+        }
+
+        if (!validateUsername(AUsername) ) {
+            setErrors({ message: validateUsername(AUsername) });
             return;
         }
     
-        if (validateUsername(AUsername) !== true) {
-            setErrors(validateUsername(AUsername));
-            return;
-        }
-    
-        if (!validatePassword(APassword) !== true) {
-            setErrors(validatePassword(APassword));
+        if (!validatePassword(APassword)) {
+            setErrors({ message: validatePassword(APassword) });
             return;
         }
 
@@ -127,7 +127,7 @@ const Register = () => {
                             </label>
                         </div>
                     </div>
-                    {errors && <div className="text-red-500 mt-1">{errors}</div>}
+                    {errors.message && <div className="text-red-500 mt-1">{errors.message}</div>}
                     <button className="w-full mb-4 text-[18px] mt-2 rounded-full bg-white text-sky-600 hover:bg-sky-600 hover:text-white py-2 transition-colors duration-300" type="submit">Register</button>
                     <div className="">
                         <span className="m-4">Already have an Account? <Link className="text-blue-300" to='/login'>Sign in</Link></span>

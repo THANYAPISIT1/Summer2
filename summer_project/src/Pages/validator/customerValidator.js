@@ -1,4 +1,4 @@
-const validateCusName = (customerName) => {
+export const validateCusName = (customerName) => {
 
     if (!customerName.trim()) {
         return "Customer's name is required."
@@ -19,12 +19,6 @@ const validateCusName = (customerName) => {
     return true
 }
 
-const validateCusEmail = (customerEmail) => {
+export const validateCusEmail = (customerEmail) => {
     return customerEmail.includes('@')
-}
-
-module.exports = {
-    validateCusName,
-    validateCusEmail
-
 }

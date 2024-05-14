@@ -1,4 +1,4 @@
-const validateTName = (templateName) => {
+export const validateTName = (templateName) => {
 
     if (!templateName.trim()) {
         return "Template's name is required."
@@ -18,5 +18,3 @@ const validateTName = (templateName) => {
 
     return true
 }
-
-module.exports = validateTName

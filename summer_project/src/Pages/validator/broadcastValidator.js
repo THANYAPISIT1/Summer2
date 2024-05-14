@@ -1,4 +1,4 @@
-const validateBName = (BName) => {
+export const validateBName = (BName) => {
 
     if (!BName.trim()) {
         return "Broadcast's name is required."
@@ -17,8 +17,4 @@ const validateBName = (BName) => {
     }
 
     return true
-}
-
-module.exports = {
-    validateBName,
 }
