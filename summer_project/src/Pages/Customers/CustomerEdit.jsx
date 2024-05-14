@@ -3,7 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
-
+import {Button} from "@nextui-org/react";
+import {UserIcon} from '../../Components/Input_btn/UserIcon';
 
 function CustomerEdit() {
   const [name, setName] = useState('Champ');
@@ -48,6 +49,7 @@ function CustomerEdit() {
   const handleDelete = () => {
     
     console.log('Deleting user...')
+    navigate('/customers');
   }
 
   useEffect(() => {
@@ -63,13 +65,10 @@ function CustomerEdit() {
         <div className="flex justify-between items-center py-4 px-4 pl-16 bg-write-200 border-b border-gray-200">
           <h2 className="text-black font-bold text-xl">{name}</h2>
           <div className='flex gap-2'>
-            <button className='bg-red-500 hover:bg-red-700 text-white no-underline py-2 px-4 rounded cursor-pointer' onClick={handleDelete}>Delete</button>
-          <Link><button
-            onClick={handleSubmit}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-          >
-            Save
-          </button></Link>
+            <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete}>Delete user</Button>
+          <Link><Button onClick={handleSubmit} color="primary" variant="solid">
+        Save
+         </Button></Link>
           </div>
         </div>
         <div className="mx-9 py-4 px-4 pl-8 border-b border-l border-r border-gray-200">
