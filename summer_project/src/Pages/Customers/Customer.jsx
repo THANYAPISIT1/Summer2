@@ -67,7 +67,7 @@ const Customer = () => {
                     styles={customStyles} 
                 />
           </div>
-        <div className=' shadow-xl hover:bg-opacity-75 rounded-xl  flex justify-between items-center  px-4 py-2 ml-6 mr-16 '>
+        <div className=' shadow-xl hover:bg-opacity-90 rounded-xl  flex justify-between items-center  px-4 py-2 ml-6 mr-16 '>
           <div className='flex '>
             <div>
               <IoPersonOutline className='text-6xl'/>
