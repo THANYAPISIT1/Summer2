@@ -118,6 +118,7 @@ function AddNewCustomer() {
             <button
               type="button"
               onClick={handleReset}
+
               className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancel
@@ -130,3 +131,4 @@ function AddNewCustomer() {
 }
 
 export default AddNewCustomer;
+

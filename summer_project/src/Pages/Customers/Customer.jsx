@@ -20,7 +20,6 @@ const Customer = () => {
             'Authorization': `Bearer ${authToken}`
           }
         });
-        console.log(response.data);
         
         const data = response.data;
         setCustomers(data.customers);
@@ -58,6 +57,7 @@ const Customer = () => {
     Platinum: "bg-custom-platinum",
     Diamond: "bg-custom-diamond",
   };
+
 
   return (
     <div>
