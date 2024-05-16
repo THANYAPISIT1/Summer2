@@ -3,9 +3,8 @@ import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
-import {Button} from "@nextui-org/react";
 
-function AddNewCustomer() {
+function AddNewAdmin() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
@@ -25,12 +24,12 @@ function AddNewCustomer() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('New customer added:', { name, level, email, description });
+    console.log('New Admin added:', { name, level, email, description });
     setName('');
     setLevel('');
     setEmail('');
     setDescription('');
-    navigate("/customers");
+    navigate("/Admin");
   };
 
   const handleReset = (event) => {
@@ -51,35 +50,31 @@ function AddNewCustomer() {
       <Sidebar />
       <div className='ml-64 mt-16 py-3'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
-
-      <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
-      <div className='flex  gap-2.5'>
-        <div className='basis-1/2'>
-          <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
-      <input className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full'
+      <h2 className='font-bold font-sans text-2xl mb-4'>Add New Admin</h2>
+      <label htmlFor="name" className='flex font-bold font-sans text-base'>Name</label>
+      <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         type="text"
         id="name"
         name="name"
         value={name}
         onChange={(event) => setName(event.target.value)}
       />
-        </div>
-        <div className='ml-2.5'>
-        <label className="text-black font-bold font-sans text-base  " htmlFor="level">
-          Level
+
+        <div >
+        <label className="block text-black font-bold font-sans text-base  " htmlFor="level">
+          Level:
         </label>
         <Select
-                placeholder="Select Level"
+                placeholder="Select level"
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
-                className="basic-multi-select mt-2.5 w-max "
+                className="basic-multi-select my-4 w-full max-w-64"
               />
-      </div>
       </div>
 
       <label htmlFor="email" className='flex  font-bold font-sans text-base'>Email</label>
-      <input className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2'
+      <input className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         type="email"
         id="email"
         name="email"
@@ -88,7 +83,7 @@ function AddNewCustomer() {
       />
 
       <label htmlFor="description" className='flex  font-bold font-sans text-base'>Description</label>
-      <textarea className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  h-32'
+      <textarea className='p-2.5 border border-gray-300 rounded-2xl font-sans text-base'
         id="description"
         name="description"
         value={description}
@@ -96,18 +91,17 @@ function AddNewCustomer() {
       />
 
       
-      <div className='flex flex-row-reverse gap-4 mt-4'>
-         <div>
-          <Button onClick={handleSubmit} color="primary" variant="solid">
-        Save
-          </Button>
-        </div>
-         <div>
-          <Button onClick={handleReset} color="danger" variant="light">
+      <div className='flex gap-2'>
+         <div className='flex gap-2'>
+          <button onClick={handleReset} className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Cancel
-          </Button> 
+      </button>
         </div>
-       
+        <div className='flex gap-2'>
+          <button onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        Save
+      </button>
+        </div>
       </div>
     </form>
       </div>
@@ -115,5 +109,5 @@ function AddNewCustomer() {
   );
 }
 
-export default AddNewCustomer;
+export default AddNewAdmin;
 

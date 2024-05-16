@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../../Components/Layouts/Sidebar";
@@ -86,5 +85,3 @@ const Template = () => {
 };
 
 export default Template;
-
-
