@@ -76,7 +76,7 @@ function CustomerEdit() {
       console.error('Error updating customer:', error);
     }
 
-    navigate("/customers");
+    
   };
 
   const handleCancel = () => {
