@@ -3,13 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
-import {Button} from "@nextui-org/react";
-import {UserIcon} from '../../Components/Input_btn/UserIcon';
 
-function CustomerEdit() {
+
+function AdminEdit() {
   const [name, setName] = useState('Champ');
   const [email, setEmail] = useState('champ489245@gmail.com');
-  const [level, setLevel] = useState('Gold');
+  const [level, setLevel] = useState('');
   const navigate = useNavigate();
   
   
@@ -46,12 +45,6 @@ function CustomerEdit() {
     navigate('/customers');
   };
 
-  const handleDelete = () => {
-    
-    console.log('Deleting user...')
-    navigate('/customers');
-  }
-
   useEffect(() => {
     console.log('Component mounted or updated');
   }, []);
@@ -64,12 +57,12 @@ function CustomerEdit() {
       <div className="flex flex-col ml-64 mt-16 py-3">
         <div className="flex justify-between items-center py-4 px-4 pl-16 bg-write-200 border-b border-gray-200">
           <h2 className="text-black font-bold text-xl">{name}</h2>
-          <div className='flex gap-2'>
-            <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete}>Delete user</Button>
-          <Link><Button onClick={handleSubmit} color="primary" variant="solid">
-        Save
-         </Button></Link>
-          </div>
+          <Link><button
+            onClick={handleSubmit}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Save
+          </button></Link>
         </div>
         <div className="mx-9 py-4 px-4 pl-8 border-b border-l border-r border-gray-200">
           <form onSubmit={handleSubmit}>
@@ -81,7 +74,7 @@ function CustomerEdit() {
                 Name:
               </label>
               <input
-                className="shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
+                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
                 id="name"
                 type="text"
                 placeholder="Name"
@@ -98,7 +91,7 @@ function CustomerEdit() {
                 Email:
               </label>
               <input
-                className="shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
+                className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2"
                 id="email"
                 type="email"
                 placeholder="Email"
@@ -115,11 +108,11 @@ function CustomerEdit() {
                 Level:
               </label>
               <Select
-                placeholder={level}
+                placeholder="Select level"
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
-                className="basic-multi-select my-4 w-max "
+                className="basic-multi-select my-4 w-full max-w-64"
               />
             </div>
             
@@ -130,4 +123,4 @@ function CustomerEdit() {
   );
 }
 
-export default CustomerEdit;
+export default AdminEdit;
