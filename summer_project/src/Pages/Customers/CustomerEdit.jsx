@@ -4,6 +4,8 @@ import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate, useParams } from 'react-router-dom';
+import {Button} from "@nextui-org/react";
+import {UserIcon} from '../../Components/Input_btn/UserIcon';
 
 function CustomerEdit() {
   const [name, setName] = useState(null);
@@ -83,6 +85,12 @@ function CustomerEdit() {
     navigate('/customers')
   };
 
+  const handleDelete = () => {
+    
+    console.log('Deleting user...')
+    navigate('/customers');
+  }
+
   return (
     <div>
       <TopNav />
@@ -91,7 +99,9 @@ function CustomerEdit() {
       { name && level && email ? (
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
           <h2 className='font-bold font-sans text-xl mb-4'>Edit Customer</h2>
+          <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete} >Delete user</Button>
           <div className='flex gap-2.5'>
+            
             <div className='basis-1/2'>
               <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
               <input
@@ -130,6 +140,7 @@ function CustomerEdit() {
             >
               Save
             </button>
+            
             <button
               type="button"
               onClick={handleCancel}
