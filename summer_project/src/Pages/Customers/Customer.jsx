@@ -1,60 +1,125 @@
-import { Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
+import Select from "react-select";
+import { useState, useEffect } from "react";
 import { IoPersonOutline } from "react-icons/io5";
-import TopNav from '../../Components/Layouts/TopNav';
-import Sidebar from '../../Components/Layouts/Sidebar';
+import TopNav from "../../Components/Layouts/TopNav";
+import Sidebar from "../../Components/Layouts/Sidebar";
+import axios from "axios";
 
 const Customer = () => {
+  const [customers, setCustomers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const [name, setName] = useState('');
-  const [level, setLevel] = useState('');
-  const [email, setEmail] = useState('');
-  
+  useEffect(() => {
+    const fetchCustomers = async () => {
+      try {
+        const authToken = localStorage.getItem('token');
+        const response = await axios.get(`http://localhost:8000/customers?page=${currentPage}`, {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+        console.log(response.data);
+        
+        const data = response.data;
+        setCustomers(data.customers);
+        setCurrentPage(data.currentPage);
+        setTotalPages(data.totalPages);
+      } catch (error) {
+        console.error('Error fetching customers:', error);
+      }
+    };
 
-   useEffect(() => {
-    setName('Champ');
-    setLevel('Gold');
-    setEmail('champ489245@gmail.com');
-  }, []);
+    fetchCustomers();
+  }, [currentPage]); 
 
-  const levelColors = {
-     
-    'Silver': 'bg-custom-silver',
-    'Gold': 'bg-custom-yellow',
-    'Platinum': 'bg-custom-platinum',
-    'Diamond': 'bg-custom-diamond',
+  const customStyles = {
+    control: (base) => ({
+      ...base,
+      border: "1px solid #d1d5db",
+      borderRadius: "0.375rem",
+      minHeight: "calc(2.25rem + 2px)",
+      boxShadow: "none",
+    }),
   };
 
+  const tags = [
+    { label: "Silver", value: "Silver" },
+    { label: "Gold", value: "Gold" },
+    { label: "Platinum", value: "Platinum" },
+    { label: "Diamond", value: "Diamond" },
+  ];
+
+  const levelColors = {
+    Silver: "bg-custom-silver",
+    Gold: "bg-custom-yellow",
+    Platinum: "bg-custom-platinum",
+    Diamond: "bg-custom-diamond",
+  };
 
   return (
     <div>
-        <TopNav />
-        <Sidebar />
-      <div className='ml-64 mt-16 py-3'>
-
-          <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-8 border-b border-gray-200 ">
-            <h2 className="text-black text-xl">Customers</h2>
-            <Link to="/customer/add" ><button type="button" className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">Add new customer</button></Link>
-            
-          </header>
-        <div className=' shadow-xl hover:bg-opacity-75 rounded-xl  flex justify-between items-center  px-4 py-2 ml-6 mr-16 '>
-          <div className='flex '>
-            <div>
-              <IoPersonOutline className='text-6xl'/>
-            </div>
-            <div className='pl-5 pt-2'>
-              <div className='flex '>
-                <p className='font-medium font-sans text-xl rounded pl-4 pr-2 content-center'>{name}</p>
-              <div className={`content-center text-xs border rounded-xl px-2 ${levelColors[level] || 'bg-black'}`}>{level}</div>
-              </div>
-              <div className='flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5 '><h4>Email:</h4><p className='font-medium font-sans text-sm rounded pl-1'>{email}</p></div></div>  
-          </div>
-          <Link to="/customer/detail"><button type="button" className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-8 py-2.5 text-center me-2 mt-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Detail</button></Link>
+      <TopNav />
+      <Sidebar />
+      <div className="ml-64 mt-16 py-3">
+        <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-4 border-b border-gray-200 ">
+          <h2 className="text-black text-xl">Customers</h2>
+          <Link to="/customer/add">
+            <button
+              type="button"
+              className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+            >
+              Add new customer
+            </button>
+          </Link>
+        </header>
+        <div className="border-b border-gray-200 mb-8">
+          <Select
+            placeholder={<div>Select Tags</div>}
+            options={tags}
+            isMulti
+            className="basic-multi-select my-4 w-full max-w-64 mx-4"
+            styles={customStyles} 
+          />
         </div>
-      
+        {customers.map(customer => (
+          <div className=" shadow-xl hover:bg-opacity-75 rounded-xl flex justify-between items-center px-4 py-2 ml-6 mr-16 mb-4">
+          <div className="flex ">
+            <div>
+              <IoPersonOutline className="text-6xl" />
+            </div>
+            <div className="pl-5 pt-2">
+              <div className="flex ">
+                <p className="font-medium font-sans text-xl rounded pl-4 pr-2 content-center">
+                  {customer.CusName} 
+                </p>
+                <div
+                  className={`content-center text-xs border rounded-xl px-2 ${levelColors[customer.CusLevel] || 'bg-black'}`}>
+                  {customer.CusLevel} 
+                </div>
+              </div>
+              <div className="flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5 ">
+                <h4>Email:</h4>
+                <p className="font-medium font-sans text-sm rounded pl-1">
+                  {customer.CusEmail} 
+                </p>
+              </div>
+            </div>
+          </div>
+          <Link to={`/customer/edit/${customer.CusID}`}> 
+            <button className="flex p-2.5 bg-teal-500 hover:bg-teal-700 rounded-xl hover:rounded-3xl  transition-all duration-300 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button>
+          </Link>
+        </div>
+        ))}
+        
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Customer
+export default Customer;

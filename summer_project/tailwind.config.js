@@ -9,7 +9,14 @@ export default {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-silver': '#BAB4B4',
+        'custom-yellow': '#FFE455',
+        'custom-platinum': '#34A0B4',
+        'custom-diamond': '#D678FF',
+      },
+    },
   },
 
   
