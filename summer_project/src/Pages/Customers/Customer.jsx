@@ -20,7 +20,6 @@ const Customer = () => {
             'Authorization': `Bearer ${authToken}`
           }
         });
-        console.log(response.data);
         
         const data = response.data;
         setCustomers(data.customers);
@@ -28,6 +27,7 @@ const Customer = () => {
         setTotalPages(data.totalPages);
       } catch (error) {
         console.error('Error fetching customers:', error);
+        alert(`Error fetching customers: ${error.response?.data?.message || error.message}`);
       }
     };
 
@@ -63,7 +63,7 @@ const Customer = () => {
       <TopNav />
       <Sidebar />
       <div className="ml-64 mt-16 py-3">
-        <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-4 border-b border-gray-200 ">
+        <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-4 border-b border-gray-200">
           <h2 className="text-black text-xl">Customers</h2>
           <Link to="/customer/add">
             <button
@@ -84,41 +84,41 @@ const Customer = () => {
           />
         </div>
         {customers.map(customer => (
-          <div className=" shadow-xl hover:bg-opacity-75 rounded-xl flex justify-between items-center px-4 py-2 ml-6 mr-16 mb-4">
-          <div className="flex ">
-            <div>
-              <IoPersonOutline className="text-6xl" />
-            </div>
-            <div className="pl-5 pt-2">
-              <div className="flex ">
-                <p className="font-medium font-sans text-xl rounded pl-4 pr-2 content-center">
-                  {customer.CusName} 
-                </p>
-                <div
-                  className={`content-center text-xs border rounded-xl px-2 ${
-                    levelColors[customer.CusLevel] || "bg-black" 
-                  }`}
-                >
-                  {customer.CusLevel} 
+          <div key={customer.CusID} className="shadow-xl hover:bg-opacity-75 rounded-xl flex justify-between items-center px-4 py-2 ml-6 mr-16 mb-4">
+            <div className="flex">
+              <div>
+                <IoPersonOutline className="text-6xl" />
+              </div>
+              <div className="pl-5 pt-2">
+                <div className="flex">
+                  <p className="font-medium font-sans text-xl rounded pl-4 pr-2 content-center">
+                    {customer.CusName}
+                  </p>
+                  <div
+                    className={`content-center text-xs border rounded-xl px-2 ${
+                      levelColors[customer.CusLevel] || "bg-black"
+                    }`}
+                  >
+                    {customer.CusLevel}
+                  </div>
+                </div>
+                <div className="flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5">
+                  <h4>Email:</h4>
+                  <p className="font-medium font-sans text-sm rounded pl-1">
+                    {customer.CusEmail}
+                  </p>
                 </div>
               </div>
-              <div className="flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5 ">
-                <h4>Email:</h4>
-                <p className="font-medium font-sans text-sm rounded pl-1">
-                  {customer.CusEmail} 
-                </p>
-              </div>
             </div>
+            <Link to={`/customer/edit/${customer.CusID}`}>
+              <button
+                type="button"
+                className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-8 py-2.5 text-center me-2 mt-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              >
+                Edit
+              </button>
+            </Link>
           </div>
-          <Link to={`/customer/edit/${customer.CusID}`}> 
-            <button
-              type="button"
-              className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-8 py-2.5 text-center me-2 mt-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-              Edit
-            </button>
-          </Link>
-        </div>
         ))}
         
       </div>
