@@ -5,14 +5,11 @@ import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 
-
 function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState(''); // State for error message
-  const [isLoading, setIsLoading] = useState(false); // State for loading
+  const [message, setMessage] = useState(''); // State for success message
   const navigate = useNavigate();
 
   const levelOptions = [
@@ -29,45 +26,39 @@ function AddNewCustomer() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Basic validation
-    if (!name || !level || !email) {
-      setError('All fields are required');
-      return;
-    }
-
-    const authToken = localStorage.getItem('token');
+    const authToken = localStorage.getItem('token'); // Retrieve the token from localStorage
 
     try {
-      setIsLoading(true); // Start loading
-      setError(''); // Clear any previous errors
-
       await axios.post(
         'http://localhost:8000/customers',
         {
           CusName: name,
           CusEmail: email,
-          CusLevel: level,
+          CusLevel: level
         },
         {
           headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
+            'Authorization': `Bearer ${authToken}`
+          }
         }
       );
 
+      // Show success message
       setMessage('Customer created successfully!');
+      
+      // Clear the form fields
       setName('');
       setLevel('');
       setEmail('');
 
+      // Delay navigation to show the message for a moment
       setTimeout(() => {
-        navigate('/customers');
-      }, 2000);
+        navigate("/customers");
+      }, 2000); // Navigate after 2 seconds
+
     } catch (error) {
-      setError('Error creating customer. Please try again.');
       console.error('Error creating customer:', error);
-    } finally {
-      setIsLoading(false); // End loading
+      // Handle error appropriately, e.g., show an error message to the user
     }
   };
 
@@ -75,7 +66,6 @@ function AddNewCustomer() {
     setName('');
     setLevel('');
     setEmail('');
-    setError(''); // Clear any previous errors
   };
 
   return (
@@ -85,62 +75,52 @@ function AddNewCustomer() {
       <div className='ml-64 mt-16 py-3'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
           <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
-          {message && <div className='mb-4 p-2 bg-green-500 text-white rounded'>{message}</div>}
-          {error && <div className='mb-4 p-2 bg-red-500 text-white rounded'>{error}</div>}
+          {message && <div className="mb-4 p-2 bg-green-500 text-white rounded">{message}</div>}
           <div className='flex gap-2.5'>
             <div className='basis-1/2'>
-              <label htmlFor='name' className='flex font-bold font-sans text-base mb-2.5'>
-                Name
-              </label>
+              <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
               <input
                 className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full'
-                type='text'
-                id='name'
-                name='name'
+                type="text"
+                id="name"
+                name="name"
                 value={name}
                 onChange={(event) => setName(event.target.value)}
-                disabled={isLoading}
               />
             </div>
             <div className='ml-2.5'>
-              <label className='text-black font-bold font-sans text-base' htmlFor='level'>
-                Level
-              </label>
+              <label className="text-black font-bold font-sans text-base" htmlFor="level">Level</label>
               <Select
-                placeholder='Select Level'
+                placeholder="Select Level"
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
-                className='basic-multi-select mt-2.5 w-max'
-                isDisabled={isLoading}
+                className="basic-multi-select mt-2.5 w-max"
               />
             </div>
           </div>
-          <label htmlFor='email' className='flex font-bold font-sans text-base'>
-            Email
-          </label>
+          <label htmlFor="email" className='flex font-bold font-sans text-base'>Email</label>
           <input
             className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2'
-            type='email'
-            id='email'
-            name='email'
+            type="email"
+            id="email"
+            name="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            disabled={isLoading}
           />
           <div className='flex flex-row-reverse gap-4 mt-4'>
             <button
-              type='submit'
-              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-              disabled={isLoading}
+              type="submit"
+              
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              {isLoading ? 'Saving...' : 'Save'}
+              Save
             </button>
             <button
-              type='button'
+              type="button"
               onClick={handleReset}
-              className='bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
-              disabled={isLoading}
+
+              className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancel
             </button>
@@ -152,3 +132,4 @@ function AddNewCustomer() {
 }
 
 export default AddNewCustomer;
+

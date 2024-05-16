@@ -99,7 +99,7 @@ function CustomerEdit() {
       { name && level && email ? (
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
           <h2 className='font-bold font-sans text-xl mb-4'>Edit Customer</h2>
-          <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete} >Delete user</Button>
+          
           <div className='flex gap-2.5'>
             
             <div className='basis-1/2'>
