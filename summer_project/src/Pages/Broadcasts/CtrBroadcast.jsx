@@ -3,7 +3,6 @@ import Sidebar from "../../Components/Layouts/Sidebar";
 import TopNav from "../../Components/Layouts/TopNav";
 import BroadcastNameModal from "../../Components/BCList/BroadcastNameModal";
 import { IoPencil } from "react-icons/io5";
-
 import BCRecipients from "./BCRecipients";
 import BCContent from "./BCContent";
 import BCReview from "./BCReview";
@@ -89,9 +88,6 @@ const CtrBroadcast = () =>{
                         {components[currentIndex]}
                     </section>
             </div>
-
-
-
 
             <BroadcastNameModal
                 broadcastName={broadcastName}
