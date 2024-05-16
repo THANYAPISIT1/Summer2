@@ -6,7 +6,6 @@ import TopNav from "../../Components/Layouts/TopNav";
 import Sidebar from "../../Components/Layouts/Sidebar";
 import axios from "axios";
 
-
 const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,6 +28,7 @@ const Customer = () => {
         setTotalPages(data.totalPages);
       } catch (error) {
         console.error('Error fetching customers:', error);
+        alert(`Error fetching customers: ${error.response?.data?.message || error.message}`);
       }
     };
 
@@ -43,7 +43,7 @@ const Customer = () => {
       minHeight: "calc(2.25rem + 2px)",
       boxShadow: "none",
     }),
-
+  };
 
   const tags = [
     { label: "Silver", value: "Silver" },
@@ -64,7 +64,7 @@ const Customer = () => {
       <TopNav />
       <Sidebar />
       <div className="ml-64 mt-16 py-3">
-        <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-4 border-b border-gray-200 ">
+        <header className="flex justify-between items-center font-bold bg-white pl-8 px-2 py-4 mb-4 border-b border-gray-200">
           <h2 className="text-black text-xl">Customers</h2>
           <Link to="/customer/add">
             <button
@@ -85,29 +85,32 @@ const Customer = () => {
           />
         </div>
         {customers.map(customer => (
-          <div className=" shadow-xl hover:bg-opacity-75 rounded-xl flex justify-between items-center px-4 py-2 ml-6 mr-16 mb-4">
-          <div className="flex ">
-            <div>
-              <IoPersonOutline className="text-6xl" />
-            </div>
-            <div className="pl-5 pt-2">
-              <div className="flex ">
-                <p className="font-medium font-sans text-xl rounded pl-4 pr-2 content-center">
-                  {customer.CusName} 
-                </p>
-                <div
-                  className={`content-center text-xs border rounded-xl px-2 ${levelColors[customer.CusLevel] || 'bg-black'}`}>
-                  {customer.CusLevel} 
+          <div key={customer.CusID} className="shadow-xl hover:bg-opacity-75 rounded-xl flex justify-between items-center px-4 py-2 ml-6 mr-16 mb-4">
+            <div className="flex">
+              <div>
+                <IoPersonOutline className="text-6xl" />
+              </div>
+              <div className="pl-5 pt-2">
+                <div className="flex">
+                  <p className="font-medium font-sans text-xl rounded pl-4 pr-2 content-center">
+                    {customer.CusName}
+                  </p>
+                  <div
+                    className={`content-center text-xs border rounded-xl px-2 ${
+                      levelColors[customer.CusLevel] || "bg-black"
+                    }`}
+                  >
+                    {customer.CusLevel}
+                  </div>
+                </div>
+                <div className="flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5">
+                  <h4>Email:</h4>
+                  <p className="font-medium font-sans text-sm rounded pl-1">
+                    {customer.CusEmail}
+                  </p>
                 </div>
               </div>
-              <div className="flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5 ">
-                <h4>Email:</h4>
-                <p className="font-medium font-sans text-sm rounded pl-1">
-                  {customer.CusEmail} 
-                </p>
-              </div>
             </div>
-          </div>
           <Link to={`/customer/edit/${customer.CusID}`}> 
             <button className="flex p-2.5 bg-teal-500 hover:bg-teal-700 rounded-xl hover:rounded-3xl  transition-all duration-300 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">

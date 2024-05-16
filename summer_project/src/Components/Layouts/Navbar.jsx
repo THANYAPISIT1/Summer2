@@ -1,38 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useState } from 'react';
+import { useState } from "react";
 
-function useString(Untitle) {
-  const [stringValue, setStringValue] = useState(Untitle);
-
-  const updateStringValue = (newValue) => {
-    setStringValue(newValue);
-  };
-
-  return [stringValue, updateStringValue];
-}
-
-const Navbar= () => {
-  const [stringValue, setStringValue] = useString("Untitle");
+const Navbar = ({ onDataChange, onPost }) => {
+  const [TName, setTName] = useState(""); 
 
   const handleChange = (event) => {
-    setStringValue(event.target.value);
+    const newValue = event.target.value;
+    setTName(newValue);
   };
+
+  const handleSave = () => {
+    
+    onDataChange(TName); 
+    onPost();
+  };
+
   return (
-    <div class=" p-2 mt-10">
-      <div className=" text-black flex flex-row">
+    <div className="p-2 mt-10">
+      <div className="text-black flex flex-row">
         <div className="basis-5/6 pl-8 p-2 ml-64">
-          <input type="text" value={stringValue} onChange={handleChange} />
-          <p>Current value: {stringValue}</p>
+          <input type="text" value={TName} onChange={handleChange} />
         </div>
-        <div className="flex content-center mt-2 ">
-          <div className=" ">
-            <button className="mr-2">
-              <Link to="/Template">Exit</Link>
-            </button>
-          </div>
+        <div className="flex content-center mt-2">
           <div className="">
-            <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-2 mr-10">
+            <button className="bg-cyan-500 hover:bg-cyan-600 text-white px-2 mr-10" onClick={handleSave}>
               Save
             </button>
           </div>
@@ -40,5 +30,6 @@ const Navbar= () => {
       </div>
     </div>
   );
-}
+};
+
 export default Navbar;
