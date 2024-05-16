@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
@@ -9,7 +10,6 @@ function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
-  const [description, setDescription] = useState('');
   const navigate = useNavigate();
 
   const levelOptions = [
@@ -23,27 +23,44 @@ function AddNewCustomer() {
     setLevel(selectedOption.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('New customer added:', { name, level, email, description });
-    setName('');
-    setLevel('');
-    setEmail('');
-    setDescription('');
-    navigate("/customers");
+
+    const authToken = localStorage.getItem('token'); // Retrieve the token from localStorage
+
+    try {
+      await axios.post(
+        'http://localhost:8000/customers',
+        {
+          CusName: name,
+          CusEmail: email,
+          CusLevel: level
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        }
+      );
+
+      setMessage('Customer created successfully!');
+
+      setName('');
+      setLevel('');
+      setEmail('');
+
+      setTimeout(() =>{
+        navigate("/customers");
+      }, 2000 )
+      
+    } catch (error) {
+      console.error('Error creating customer:', error);
+    }
   };
 
-  const handleReset = (event) => {
-    event.preventDefault();
-    setName('');
-    setLevel('');
-    setEmail('');
-    setDescription('');
-  }
-
-  useEffect(() => {
-    console.log('Component mounted or updated');
-  }, []);
+  const handleCancel = () => {
+    navigate('/customers')
+  };
 
   return (
     <div>
@@ -51,69 +68,59 @@ function AddNewCustomer() {
       <Sidebar />
       <div className='ml-64 mt-16 py-3'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
-
-      <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
-      <div className='flex  gap-2.5'>
-        <div className='basis-1/2'>
-          <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
-      <input className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full'
-        type="text"
-        id="name"
-        name="name"
-        value={name}
-        onChange={(event) => setName(event.target.value)}
-      />
-        </div>
-        <div className='ml-2.5'>
-        <label className="text-black font-bold font-sans text-base  " htmlFor="level">
-          Level
-        </label>
-        <Select
+          <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
+          <div className='flex gap-2.5'>
+            <div className='basis-1/2'>
+              <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
+              <input
+                className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full'
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+              />
+            </div>
+            <div className='ml-2.5'>
+              <label className="text-black font-bold font-sans text-base" htmlFor="level">Level</label>
+              <Select
                 placeholder="Select Level"
                 options={levelOptions}
                 value={levelOptions.find((option) => option.value === level)}
                 onChange={handleChange}
-                className="basic-multi-select mt-2.5 w-max "
+                className="basic-multi-select mt-2.5 w-max"
               />
-      </div>
-      </div>
+            </div>
+          </div>
+          <label htmlFor="email" className='flex font-bold font-sans text-base'>Email</label>
+          <input
+            className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2'
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <div className='flex flex-row-reverse gap-4 mt-4'>
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
 
-      <label htmlFor="email" className='flex  font-bold font-sans text-base'>Email</label>
-      <input className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2'
-        type="email"
-        id="email"
-        name="email"
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-      />
-
-      <label htmlFor="description" className='flex  font-bold font-sans text-base'>Description</label>
-      <textarea className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  h-32'
-        id="description"
-        name="description"
-        value={description}
-        onChange={(event) => setDescription(event.target.value)}
-      />
-
-      
-      <div className='flex flex-row-reverse gap-4 mt-4'>
-         <div>
-          <Button onClick={handleSubmit} color="primary" variant="solid">
-        Save
-          </Button>
-        </div>
-         <div>
-          <Button onClick={handleReset} color="danger" variant="light">
-        Cancel
-          </Button> 
-        </div>
-       
-      </div>
-    </form>
       </div>
     </div>
   );
 }
 
 export default AddNewCustomer;
-

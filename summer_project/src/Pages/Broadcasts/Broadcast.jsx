@@ -15,6 +15,13 @@ const Broadcast = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [loading, setLoading] = useState(false);
 
+
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState(null);
+    const [selectedLastUpdate, setSelectedLastUpdate] = useState(null);
+    const [selectedDateRange, setSelectedDateRange] = useState({ startDate: new Date(), endDate: new Date().setMonth(11) });
+
+
     useEffect(() => {
         fetchBroadcasts(currentPage);
     }, [currentPage]);
@@ -58,12 +65,24 @@ const Broadcast = () => {
         
         return `${day}/${month}/${year} ${hours}:${minutes}`;
     };
-
-
     
     const handlePaginationChange = async (page) => {
         fetchBroadcasts(page);
     };
+
+    const handleFilterChange = (filters) => {
+        setSelectedTags(filters.selectedTags);
+        setSelectedStatus(filters.selectedStatus);
+        setSelectedLastUpdate(filters.selectedLastUpdate);
+        setSelectedDateRange(filters.selectedDateRange);
+    };
+
+    useEffect(() => {
+        console.log("Selected Tags:", selectedTags);
+        console.log("Selected Status:", selectedStatus);
+        console.log("Selected Last Update:", selectedLastUpdate);
+        console.log("Selected Date Range:", selectedDateRange);
+    }, [selectedTags, selectedStatus, selectedLastUpdate, selectedDateRange]);
 
     return (
         <div className='relative'>
@@ -78,7 +97,7 @@ const Broadcast = () => {
                         </Link>
                     </header>
                     <hr />
-                    <Filter />
+                    <Filter onFilterChange={handleFilterChange} />
                     <hr />
 
 

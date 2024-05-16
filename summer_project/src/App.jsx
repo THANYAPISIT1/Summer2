@@ -35,7 +35,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="customers" element={<Customer />} />
-        <Route path="customer/edit" element={<CustomerEdit />} />
+        <Route path="customer/edit/:CusID" element={<CustomerEdit />} />
         <Route path="customer/add" element={<AddNewCustomer />} />
 
       </Routes>
