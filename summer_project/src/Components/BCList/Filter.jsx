@@ -15,7 +15,7 @@ const customStyles = {
   }),
 };
 
-const Filter = () => {
+const Filter = ({ onFilterChange }) => {
 
     const [value, setValue] = useState({ 
         startDate: new Date(), 
@@ -49,21 +49,45 @@ const Filter = () => {
     const [selectedLastUpdate, setSelectedLastUpdate] = useState(null);
 
     const handleValueChange = (newValue) => {
-        console.log("Selected Date:", newValue.startDate,newValue.endDate)
-        setValue(newValue); 
-    } 
-
+        console.log("Selected Date:", newValue.startDate, newValue.endDate)
+        setValue(newValue);
+        onFilterChange({
+          selectedTags,
+          selectedStatus,
+          selectedLastUpdate,
+          selectedDateRange: newValue,
+        });
+      };
+  
     const handleTagsChange = (newValue) => {
-        setSelectedTags(newValue);
-    }
-
+      setSelectedTags(newValue);
+      onFilterChange({
+        selectedTags: newValue,
+        selectedStatus,
+        selectedLastUpdate,
+        selectedDateRange: value,
+      });
+    };
+  
     const handleStatusChange = (newValue) => {
-        setSelectedStatus(newValue);
-    }
-
+      setSelectedStatus(newValue);
+      onFilterChange({
+        selectedTags,
+        selectedStatus: newValue,
+        selectedLastUpdate,
+        selectedDateRange: value,
+      });
+    };
+  
     const handleLastUpdateChange = (newValue) => {
-        setSelectedLastUpdate(newValue);
-    }
+      setSelectedLastUpdate(newValue);
+      onFilterChange({
+        selectedTags,
+        selectedStatus,
+        selectedLastUpdate: newValue,
+        selectedDateRange: value,
+      });
+    };
 
     useEffect(() => {
         console.log("Selected Tags:", selectedTags);

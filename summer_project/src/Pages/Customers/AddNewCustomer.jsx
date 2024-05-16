@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
-import {Button} from "@nextui-org/react";
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
+  const [message, setMessage] = useState(''); // State for success message
   const navigate = useNavigate();
 
   const levelOptions = [
@@ -43,23 +43,29 @@ function AddNewCustomer() {
         }
       );
 
+      // Show success message
       setMessage('Customer created successfully!');
-
+      
+      // Clear the form fields
       setName('');
       setLevel('');
       setEmail('');
 
-      setTimeout(() =>{
+      // Delay navigation to show the message for a moment
+      setTimeout(() => {
         navigate("/customers");
-      }, 2000 )
-      
+      }, 2000); // Navigate after 2 seconds
+
     } catch (error) {
       console.error('Error creating customer:', error);
+      // Handle error appropriately, e.g., show an error message to the user
     }
   };
 
-  const handleCancel = () => {
-    navigate('/customers')
+  const handleReset = () => {
+    setName('');
+    setLevel('');
+    setEmail('');
   };
 
   return (
@@ -69,6 +75,7 @@ function AddNewCustomer() {
       <div className='ml-64 mt-16 py-3'>
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
           <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
+          {message && <div className="mb-4 p-2 bg-green-500 text-white rounded">{message}</div>}
           <div className='flex gap-2.5'>
             <div className='basis-1/2'>
               <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
@@ -110,17 +117,18 @@ function AddNewCustomer() {
             </button>
             <button
               type="button"
-              onClick={handleCancel}
+              onClick={handleReset}
+
               className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancel
             </button>
           </div>
         </form>
-
       </div>
     </div>
   );
 }
 
 export default AddNewCustomer;
+

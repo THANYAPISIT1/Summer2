@@ -39,9 +39,9 @@ const Sidebar = () => {
                 </li>
                 <hr />
                 <li className='my-2 rounded hover:shadow hover:bg-gray-300 py-2'>
-                    <Link to='/admins' className='px-3'>
+                    <Link to='/admin' className='px-3'>
                         <IoPeopleCircleSharp className='inline-block w-6 h-6 mr-2 -mt-2 '/>
-                        Admins
+                        Admin
                     </Link>
                 </li>
                 <hr />
