@@ -22,7 +22,12 @@ const Broadcast = () => {
     const fetchBroadcasts = async (page) => {
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:8000/broadcasts-test?page=${page}`);
+            const authToken = localStorage.getItem('token')
+            const response = await axios.get(`http://localhost:8000/broadcasts?page=${page}`,{
+                headers:{
+                    'authorization' : `Bearer ${authToken}`
+                }
+            });
             const data = response.data;
 
             // Format BUpdate date before setting the broadcasts state
@@ -40,7 +45,6 @@ const Broadcast = () => {
             setLoading(false);
         }
     };
-
 
 
     // Function to format date to "dd/mm/yyyy hh:mm"
@@ -69,7 +73,7 @@ const Broadcast = () => {
                 <section className="ml-64">
                     <header className='flex justify-between static'>
                         <div className="text-xl p-8 font-bold">Broadcast</div>
-                        <Link to='/broadcast/recipients' className='mt-4'>
+                        <Link to='/create-broadcast' className='mt-4'>
                             <Createbtn className='mr-4 border mt-8 h-10 items-center w-40 p-2 rounded-md text-blue-600 hover:bg-blue-500 hover:text-white' />
                         </Link>
                     </header>
@@ -98,7 +102,7 @@ const Broadcast = () => {
                                         <span className='bg-gray-200 py-2 px-3 rounded-lg text-xs'>{broadcast.BStatus}</span>
                                     </div>
                                     <div>
-                                        {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Scheduled' ? (
+                                        {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Schedule' ? (
                                             <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
                                                 Can edit
                                             </button>
