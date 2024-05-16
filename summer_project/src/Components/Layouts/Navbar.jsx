@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const Navbar = ({ onDataChange, onPost }) => {
   const [TName, setTName] = useState(""); 

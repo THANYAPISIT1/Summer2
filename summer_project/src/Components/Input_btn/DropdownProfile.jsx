@@ -1,4 +1,4 @@
-const Dropdown = () =>{
+const DropdownProfile = () =>{
     return (
         <>
             <div className="relative inline-block text-left">
@@ -26,4 +26,4 @@ const Dropdown = () =>{
     );
 };
 
-export default Dropdown
+export default DropdownProfile;

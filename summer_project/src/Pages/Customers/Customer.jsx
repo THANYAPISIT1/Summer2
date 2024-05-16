@@ -6,6 +6,7 @@ import TopNav from "../../Components/Layouts/TopNav";
 import Sidebar from "../../Components/Layouts/Sidebar";
 import axios from "axios";
 
+
 const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,6 +58,7 @@ const Customer = () => {
     Platinum: "bg-custom-platinum",
     Diamond: "bg-custom-diamond",
   };
+
 
   return (
     <div>
@@ -110,15 +112,14 @@ const Customer = () => {
                 </div>
               </div>
             </div>
-            <Link to={`/customer/edit/${customer.CusID}`}>
-              <button
-                type="button"
-                className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-8 py-2.5 text-center me-2 mt-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-              >
-                Edit
-              </button>
-            </Link>
-          </div>
+          <Link to={`/customer/edit/${customer.CusID}`}> 
+            <button className="flex p-2.5 bg-teal-500 hover:bg-teal-700 rounded-xl hover:rounded-3xl  transition-all duration-300 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </button>
+          </Link>
+        </div>
         ))}
         
       </div>

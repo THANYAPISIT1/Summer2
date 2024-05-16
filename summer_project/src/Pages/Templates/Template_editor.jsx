@@ -58,6 +58,7 @@ const Template_editor = () => {
         
       </div>
     </div>
+
   );
 };
 

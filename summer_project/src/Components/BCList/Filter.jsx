@@ -1,7 +1,7 @@
+import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { useState } from 'react';
-import Datepicker from "react-tailwindcss-datepicker"; 
+import {DateRangePicker} from "@nextui-org/react";
 
 
 const customStyles = {
@@ -20,70 +20,107 @@ const Filter = () => {
     const [value, setValue] = useState({ 
         startDate: new Date(), 
         endDate: new Date().setMonth(11) 
-        }); 
-        
-        const handleValueChange = (newValue) => {
-        console.log("newValue:", newValue); 
-        setValue(newValue); 
-        } 
-
-
-    const tags = [
+    }); 
+    
+    const [filterByTags, setFilterByTags] = useState([
         {label:'Silver', value:'silver'},
         {label:'Gold', value:'Gold'},
         {label:'Platinum', value:'Platinum'},
         {label:'Diamond', value:'Diamond'}
-    ];
+    ]);
 
-    const AllNewsletter = [
+    const [filterByStatus, setFilterByStatus] = useState([
         {label:'All newsletter', value:'All newsletter'},
         {label:'Draft', value:'Draft'},
         {label:'Sent', value:'Sent'},
         {label:'Scheduled', value:'Scheduled'}
-    ];
+    ]);
 
-    const LastUpdate = [
-        {label:'Last Updated', value:'All newsletter'},
-        {label:'Email Sent', value:'Draft'},
-        {label:'Date Sent', value:'Sent'},
-        {label:'Name', value:'Scheduled'},
-        {label:'Date Created', value:'Scheduled'},
-        {label:'Last Updated', value:'Scheduled'}
-    ];
-    console.log(LastUpdate);
+    const [filterByLastUpdate, setFilterByLastUpdate] = useState([
+        {label:'Last Updated', value:'Last Updated'},
+        {label:'Email Sent', value:'Email Sent'},
+        {label:'Date Sent', value:'Date Sent'},
+        {label:'Name', value:'Name'},
+        {label:'Date Created', value:'Date Created'},
+    ]);
+
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState(null);
+    const [selectedLastUpdate, setSelectedLastUpdate] = useState(null);
+
+    const handleValueChange = (newValue) => {
+        console.log("Selected Date:", newValue.startDate,newValue.endDate)
+        setValue(newValue); 
+    } 
+
+    const handleTagsChange = (newValue) => {
+        setSelectedTags(newValue);
+    }
+
+    const handleStatusChange = (newValue) => {
+        setSelectedStatus(newValue);
+    }
+
+    const handleLastUpdateChange = (newValue) => {
+        setSelectedLastUpdate(newValue);
+    }
+
+    useEffect(() => {
+        console.log("Selected Tags:", selectedTags);
+    }, [selectedTags]);
+
+    useEffect(() => {
+        console.log("Selected Status:", selectedStatus);
+    }, [selectedStatus]);
+
+    useEffect(() => {
+        console.log("Selected Last Update:", selectedLastUpdate);
+    }, [selectedLastUpdate]);
       
 
     
     return(
 
-        <div>
+        <div className='z-50'>
             <div className="flex flex-row">
-                {/* <select className="select select-bordered w-full max-w-fit my-4 mx-4 px-2 border border-#d1d5db rounded-md">
 
-                    <option>All Newsletter</option>
-                    <option>Draft</option>
-                    <option>Sent</option>
-                    <option>Scheduled</option>
-                </select> */}
-
-                <CreatableSelect  placeholder={<div>Type</div>} isClearable styles={customStyles} className="my-4 w-full max-w-64 mx-4" options={AllNewsletter} />
+                <CreatableSelect  
+                    placeholder={<div>Type</div>}
+                    isClearable
+                    styles={customStyles}
+                    className="my-4 w-full max-w-64 mx-4"
+                    options={filterByStatus}
+                    value={selectedStatus}
+                    onChange={handleStatusChange}
+                />
                 
-                <Datepicker 
+                <DateRangePicker 
+                    className="my-4 w-full max-w-64 mx-4" 
+                    styles={customStyles}
                     value={value} 
-                    onChange={handleValueChange} 
-                /> 
+                    onChange={handleValueChange}
+                />
 
                 <Select 
-                     placeholder={<div>Select Tags</div>}
-
-                    options={tags} 
+                    placeholder={<div>Select Tags</div>}
+                    options={filterByTags} 
                     isMulti 
                     className="basic-multi-select my-4 w-full max-w-64"
-                    styles={customStyles} // Apply custom styles
+                    styles={customStyles}
+                    value={selectedTags}
+                    onChange={handleTagsChange}
                 />
 
 
-                <CreatableSelect  placeholder={<div>Filter</div>} isClearable styles={customStyles} className="my-4 w-full max-w-64 mx-4" options={LastUpdate} />
+                <CreatableSelect  
+                    placeholder={<div>Filter</div>}
+                    isClearable 
+                    styles={customStyles} 
+                    className="my-4 w-full max-w-64 mx-4" 
+                    options={filterByLastUpdate}
+                    value={selectedLastUpdate}
+                    onChange={handleLastUpdateChange}
+                />
 
             </div>
         </div>
