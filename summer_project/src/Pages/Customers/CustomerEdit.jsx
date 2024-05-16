@@ -98,8 +98,10 @@ function CustomerEdit() {
       <div className='ml-64 mt-16 py-3'>
       { name && level && email ? (
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
-          <h2 className='font-bold font-sans text-xl mb-4'>Edit Customer</h2>
-          <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete} >Delete user</Button>
+          <div className='flex justify-between'>
+            <h2 className='font-bold font-sans text-xl mb-4'>Edit Customer</h2>
+            <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete} >Delete user</Button>
+          </div>
           <div className='flex gap-2.5'>
             
             <div className='basis-1/2'>
