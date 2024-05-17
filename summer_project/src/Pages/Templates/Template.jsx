@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect, } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../../Components/Layouts/Sidebar";
 import TopNav from "../../Components/Layouts/TopNav";
@@ -9,6 +9,8 @@ const Template = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [highlightedTemplate, setHighlightedTemplate] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTemplates = async () => {
@@ -33,7 +35,8 @@ const Template = () => {
 
   const handleTemplateClick = (templateId) => {
     console.log(`Template ${templateId} clicked`);
-    // Implement your logic here, such as navigating to a template detail page
+    const selectedTemplate = templates.find(template => template.TID === templateId);
+    navigate(`/template/edit/${templateId}`, {state : { template: selectedTemplate}})
   };
 
   const handleNextPage = () => {
@@ -65,7 +68,7 @@ const Template = () => {
             <div className="flex content-center mt-2">
               <div>
                 <button className="bg-cyan-500 hover:bg-cyan-600 text-white mb-2 p-2 mr-10 rounded-full">
-                  <Link to="/Template_editor">Create new template</Link>
+                  <Link to="/template/create">Create new template</Link>
                 </button>
               </div>
             </div>
@@ -102,6 +105,7 @@ const Template = () => {
         </div>
       </div>
     </div>
+
   );
 };
 

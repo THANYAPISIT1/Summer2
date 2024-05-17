@@ -1,4 +1,4 @@
-import { useState } from "react";
+import  { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Layouts/Sidebar.jsx";
@@ -40,9 +40,11 @@ const Template_editor = () => {
           'Authorization': `Bearer ${authToken}`
         }
       });
+
       console.log("Template Created successfully:", response.data);
       alert("Template Created successfully!");
       navigate('/template');
+      
     } catch (error) {
       console.error("Error posting data:", error);
     }
@@ -58,6 +60,7 @@ const Template_editor = () => {
         
       </div>
     </div>
+
   );
 };
 
