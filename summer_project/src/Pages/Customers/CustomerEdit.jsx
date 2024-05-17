@@ -85,11 +85,19 @@ function CustomerEdit() {
     navigate('/customers')
   };
 
-  const handleDelete = () => {
-    
-    console.log('Deleting user...')
-    navigate('/customers');
-  }
+  const handleDelete = async () => {
+    try {
+      const authToken = localStorage.getItem('token');
+      await axios.put(`http://localhost:8000/customers/delete/${CusID}`, null, {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      navigate("/customers");
+    } catch (error) {
+      console.error('Error deleting customer:', error);
+    }
+  };
+
+
 
   return (
     <div>

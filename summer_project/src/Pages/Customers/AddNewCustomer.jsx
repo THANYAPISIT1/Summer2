@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Import Axios
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
@@ -10,7 +10,7 @@ function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState(''); // State for success message
+  const [message, setMessage] = useState(''); // State for message
   const navigate = useNavigate();
 
   const levelOptions = [
@@ -30,7 +30,7 @@ function AddNewCustomer() {
     const authToken = localStorage.getItem('token'); // Retrieve the token from localStorage
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'http://localhost:8000/customers',
         {
           CusName: name,
@@ -43,6 +43,7 @@ function AddNewCustomer() {
           }
         }
       );
+      console.log('Response:', response);
 
       setMessage('Customer created successfully!');
 
@@ -61,10 +62,8 @@ function AddNewCustomer() {
     }
   };
 
-    const handleReset = () => {
-    setName('');
-    setLevel('');
-    setEmail('');
+  const handleCancel = () => {
+    navigate('/customers')
   };
   
 
@@ -120,7 +119,13 @@ function AddNewCustomer() {
             >
               Save
             </button>
-            <Button color="danger" variant="light" onClick={handleReset}>
+
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+
               Cancel
             </Button>
           </div>

@@ -6,6 +6,7 @@ import TopNav from "../../Components/Layouts/TopNav";
 import Sidebar from "../../Components/Layouts/Sidebar";
 import { Button } from "@nextui-org/button";
 import axios from "axios";
+import { Pagination } from "@nextui-org/react"; 
 
 const Customer = () => {
   const [customers, setCustomers] = useState([]);
@@ -59,6 +60,9 @@ const Customer = () => {
     Diamond: "bg-custom-diamond",
   };
 
+  const handlePaginationChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div>
@@ -118,7 +122,15 @@ const Customer = () => {
           </Link>
         </div>
         ))}
-        
+        <footer className=' flex justify-center mt-8 my-8'>
+          <Pagination
+            isCompact
+            showControls
+            total={totalPages}
+            initialPage={currentPage}
+            onChange={handlePaginationChange}
+          />
+        </footer>
       </div>
     </div>
   );
