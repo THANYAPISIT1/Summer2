@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Import Axios
 import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
@@ -9,7 +9,7 @@ function AddNewCustomer() {
   const [name, setName] = useState('');
   const [level, setLevel] = useState('');
   const [email, setEmail] = useState('');
-  const [message, setMessage] = useState(''); // State for success message
+  const [message, setMessage] = useState(''); // State for message
   const navigate = useNavigate();
 
   const levelOptions = [
@@ -29,7 +29,7 @@ function AddNewCustomer() {
     const authToken = localStorage.getItem('token'); // Retrieve the token from localStorage
 
     try {
-      await axios.post(
+      const response = await axios.post(
         'http://localhost:8000/customers',
         {
           CusName: name,
@@ -42,30 +42,25 @@ function AddNewCustomer() {
           }
         }
       );
-
-      // Show success message
+      console.log('Response:', response);
       setMessage('Customer created successfully!');
-      
-      // Clear the form fields
+
       setName('');
       setLevel('');
       setEmail('');
 
-      // Delay navigation to show the message for a moment
       setTimeout(() => {
         navigate("/customers");
-      }, 2000); // Navigate after 2 seconds
+      }, 2000);
 
     } catch (error) {
       console.error('Error creating customer:', error);
-      // Handle error appropriately, e.g., show an error message to the user
+      setMessage('Error creating customer. Please try again.'); // Set error message
     }
   };
 
-  const handleReset = () => {
-    setName('');
-    setLevel('');
-    setEmail('');
+  const handleCancel = () => {
+    navigate('/customers')
   };
 
   return (
@@ -73,9 +68,13 @@ function AddNewCustomer() {
       <TopNav />
       <Sidebar />
       <div className='ml-64 mt-16 py-3'>
+        {message && (
+          <div className={`mb-4 ${message.includes('successfully') ? 'text-green-500' : 'text-red-500'}`}>
+            {message}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
           <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
-          {message && <div className="mb-4 p-2 bg-green-500 text-white rounded">{message}</div>}
           <div className='flex gap-2.5'>
             <div className='basis-1/2'>
               <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
@@ -117,7 +116,7 @@ function AddNewCustomer() {
             </button>
             <button
               type="button"
-              onClick={handleReset}
+              onClick={handleCancel}
               className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Cancel

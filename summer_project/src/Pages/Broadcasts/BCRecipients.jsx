@@ -1,11 +1,32 @@
-import React from "react";
+import {useState} from "react";
 import {Popover, PopoverTrigger, Button} from "@nextui-org/react";
+import Select from "react-select";
 
 const BCRecipients = () => {
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null); // Track the selected option
+  
 
+    const levelOptions = [
+        { value: 'Silver', label: 'Silver' },
+        { value: 'Gold', label: 'Gold' },
+        { value: 'Platinum', label: 'Platinum' },
+        { value: 'Diamond', label: 'Diamond' },
+      ];
 
-    const [isOpen, setIsOpen] = React.useState(false);
+      const handleChange = (selectedOption) => {
+        setSelectedOption(selectedOption ? selectedOption.value : null);
+      };
+    
+      const handleSendByEmailClick = () => {
+        setSelectedOption("email");
+      };
+    
+      const handleSendByLevelClick = () => {
+        setSelectedOption("level");
+      };
+
 
     
 
@@ -35,11 +56,38 @@ return (
                     <div id="MatchCon" style={{ display: isOpen ? 'block' : 'none' }}>
                         <p className="text-xs italic">Use conditions to target the people who should receive this newsletter</p>
                         <div className="flex-inline my-2">
-                            <button className="border-2 font-medium rounded-md bg-gray-200 hover:bg-gray-400 hover:text-white px-3 py-2 mx-3 my-2 text-sm">Send by Email</button>
-                            <button className="border-2 font-medium rounded-md bg-gray-200 hover:bg-gray-400 hover:text-white px-3 py-2 mx-3 my-2 text-sm">Send by level</button>
+                        <button
+                            onClick={handleSendByEmailClick}
+                            className="border-2 font-medium rounded-md bg-gray-200 hover:bg-gray-400 hover:text-white px-3 py-2 mx-3 my-2 text-sm"
+                            >
+                            Send by Email
+                        </button>
+                        <button
+                            onClick={handleSendByLevelClick}
+                            className="border-2 font-medium rounded-md bg-gray-200 hover:bg-gray-400 hover:text-white px-3 py-2 mx-3 my-2 text-sm"
+                            >
+                            Send by level
+                        </button>
                         </div>
-                        <div>
-                            <input type="email" name="" id="" placeholder="Customer Email" className="border border-gray-300 rounded-md p-2 my-3 w-1/4" />
+                        <div className="flex">
+                            {selectedOption === "email" && (
+                            <input
+                                type="email"
+                                name=""
+                                id=""
+                                placeholder="Customer Email"
+                                className="border border-gray-300 rounded-md p-2 my-3 w-1/4"
+                            />
+                            )}
+                            {selectedOption === "level" && (
+                            <Select
+                                placeholder="Select Level"
+                                options={levelOptions}
+                                value={levelOptions.find((option) => option.value === selectedOption)}
+                                onChange={handleChange}
+                                className="basic-multi-select ml-2 mt-2.5 w-max"
+                            />
+                            )}
                         </div>
                     </div>
                     <div className="mt-4">

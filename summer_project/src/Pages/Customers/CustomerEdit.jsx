@@ -4,6 +4,8 @@ import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate, useParams } from 'react-router-dom';
+import {Button} from "@nextui-org/react";
+import {UserIcon} from '../../Components/Input_btn/UserIcon';
 
 function CustomerEdit() {
   const [name, setName] = useState(null);
@@ -75,11 +77,26 @@ function CustomerEdit() {
     } catch (error) {
       console.error('Error updating customer:', error);
     }
+
+    
   };
 
   const handleCancel = () => {
     navigate('/customers')
   };
+
+  const handleDelete = async () => {
+    try {
+      const authToken = localStorage.getItem('token');
+      await axios.put(`http://localhost:8000/customers/delete/${CusID}`, null, {
+        headers: { 'Authorization': `Bearer ${authToken}` }
+      });
+      navigate("/customers");
+    } catch (error) {
+      console.error('Error deleting customer:', error);
+    }
+  };
+
 
   return (
     <div>
@@ -88,8 +105,12 @@ function CustomerEdit() {
       <div className='ml-64 mt-16 py-3'>
       { name && level && email ? (
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
-          <h2 className='font-bold font-sans text-xl mb-4'>Edit Customer</h2>
+          <div className='flex justify-between'>
+            <h2 className='font-bold font-sans text-xl mb-4'>Edit Customer</h2>
+            <Button color="danger" variant="bordered" startContent={<UserIcon/>} onClick={handleDelete} >Delete user</Button>
+          </div>
           <div className='flex gap-2.5'>
+            
             <div className='basis-1/2'>
               <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>
               <input
@@ -128,13 +149,10 @@ function CustomerEdit() {
             >
               Save
             </button>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
+            
+            <Button color="danger" variant="light" onClick={handleCancel}>
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       ) : (

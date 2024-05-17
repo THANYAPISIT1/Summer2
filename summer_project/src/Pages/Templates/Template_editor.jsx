@@ -40,9 +40,11 @@ const Template_editor = () => {
           'Authorization': `Bearer ${authToken}`
         }
       });
+
       console.log("Template Created successfully:", response.data);
       alert("Template Created successfully!");
       navigate('/template');
+      
     } catch (error) {
       console.error("Error posting data:", error);
     }
@@ -58,6 +60,7 @@ const Template_editor = () => {
         
       </div>
     </div>
+
   );
 };
 

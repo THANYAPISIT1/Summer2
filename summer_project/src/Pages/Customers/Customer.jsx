@@ -5,6 +5,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import TopNav from "../../Components/Layouts/TopNav";
 import Sidebar from "../../Components/Layouts/Sidebar";
 import axios from "axios";
+import { Pagination } from "@nextui-org/react"; 
 
 const Customer = () => {
   const [customers, setCustomers] = useState([]);
@@ -20,7 +21,6 @@ const Customer = () => {
             'Authorization': `Bearer ${authToken}`
           }
         });
-        console.log(response.data);
         
         const data = response.data;
         setCustomers(data.customers);
@@ -57,6 +57,10 @@ const Customer = () => {
     Gold: "bg-custom-yellow",
     Platinum: "bg-custom-platinum",
     Diamond: "bg-custom-diamond",
+  };
+
+  const handlePaginationChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -120,7 +124,15 @@ const Customer = () => {
           </Link>
         </div>
         ))}
-        
+        <footer className=' flex justify-center mt-8 my-8'>
+          <Pagination
+            isCompact
+            showControls
+            total={totalPages}
+            initialPage={currentPage}
+            onChange={handlePaginationChange}
+          />
+        </footer>
       </div>
     </div>
   );
