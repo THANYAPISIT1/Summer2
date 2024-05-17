@@ -44,39 +44,42 @@ function AddNewCustomer() {
         }
       );
 
-      // Show success message
       setMessage('Customer created successfully!');
-      
-      // Clear the form fields
+
       setName('');
       setLevel('');
       setEmail('');
 
-      // Delay navigation to show the message for a moment
       setTimeout(() => {
         navigate("/customers");
-      }, 2000); // Navigate after 2 seconds
+      }, 2000);
 
     } catch (error) {
+      console.log(name);
       console.error('Error creating customer:', error);
-      // Handle error appropriately, e.g., show an error message to the user
+      setMessage('Error creating customer. Please try again.'); // Set error message
     }
   };
 
-  const handleReset = () => {
+    const handleReset = () => {
     setName('');
     setLevel('');
     setEmail('');
   };
+  
 
   return (
     <div>
       <TopNav />
       <Sidebar />
       <div className='ml-64 mt-16 py-3'>
+        {message && (
+          <div className={`mb-4 ${message.includes('successfully') ? 'text-green-500' : 'text-red-500'}`}>
+            {message}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className='flex flex-col gap-2.5 p-5'>
           <h2 className='font-bold font-sans text-xl mb-4'>Add New Customer</h2>
-          {message && <div className="mb-4 p-2 bg-green-500 text-white rounded">{message}</div>}
           <div className='flex gap-2.5'>
             <div className='basis-1/2'>
               <label htmlFor="name" className='flex font-bold font-sans text-base mb-2.5'>Name</label>

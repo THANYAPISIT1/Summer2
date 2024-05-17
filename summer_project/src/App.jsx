@@ -16,6 +16,7 @@ import Admin from "./Pages/Admin/Admin";
 import AddNewAdmin from "./Pages/Admin/DetailandEditAdmin";
 import AdminEdit from "./Pages/Admin/AdminEdit";
 import DetailAndEditAdmin from "./Pages/Admin/DetailandEditAdmin";
+import UpdateTemplate from "./Pages/Templates/TemplateEdit";
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
         <Route path="DetailAndEditAdmin" element={<DetailAndEditAdmin />} />
         <Route path="/AdminEdit" element={<AdminEdit />} />
         <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
-        <Route path="/Admin" element={<Admin />} />
-        <Route path="/Template_editor" element={<Template_editor />} />
-        <Route path="/Template" element={<Template />} />
+        <Route path="/Admins" element={<Admin />} />
+        <Route path="/template/create" element={<Template_editor />} />
+        <Route path="/template/edit/:TID" element={<UpdateTemplate />} />
+        <Route path="/template" element={<Template />} />
         <Route path="test" element={<TestingGround />} />
         <Route path="/" element={<Broadcast />} />
         <Route path="create-broadcast" element={<CtrBroadcast />} />
