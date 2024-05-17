@@ -127,7 +127,7 @@ function AddNewCustomer() {
             >
 
               Cancel
-            </Button>
+            </button>
           </div>
         </form>
       </div>
