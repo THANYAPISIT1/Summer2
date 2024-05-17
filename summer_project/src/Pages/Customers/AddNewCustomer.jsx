@@ -4,6 +4,7 @@ import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
+import { Button } from "@nextui-org/react";
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
@@ -116,14 +117,9 @@ function AddNewCustomer() {
             >
               Save
             </button>
-            <button
-              type="button"
-              onClick={handleReset}
-
-              className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
+            <Button color="danger" variant="light" onClick={handleReset}>
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       </div>
