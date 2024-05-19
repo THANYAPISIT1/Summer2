@@ -92,7 +92,7 @@ function AddNewCustomer() {
               />
             </div>
             <div className='ml-2.5'>
-              <label className="text-black font-bold font-sans text-base" htmlFor="level">Level</label>
+              <label className="text-black font-bold text-base" htmlFor="level">Level</label>
               <Select
                 placeholder="Select Level"
                 options={levelOptions}
@@ -102,7 +102,7 @@ function AddNewCustomer() {
               />
             </div>
           </div>
-          <label htmlFor="email" className='flex font-bold font-sans text-base'>Email</label>
+          <label htmlFor="email" className='flex font-bold text-base'>Email</label>
           <input
             className='p-2.5 shadow appearance-none border rounded-2xl py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2'
             type="email"

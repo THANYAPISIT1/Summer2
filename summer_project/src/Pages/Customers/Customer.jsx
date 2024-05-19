@@ -54,10 +54,10 @@ const Customer = () => {
   ];
 
   const levelColors = {
-    Silver: "bg-custom-silver",
-    Gold: "bg-custom-yellow",
-    Platinum: "bg-custom-platinum",
-    Diamond: "bg-custom-diamond",
+    Silver: "bg-gradient-to-b from-customGray to-customGray2",
+    Gold: "bg-gradient-to-b from-customYellow via-customYellow2 to-customYellow3",
+    Platinum: "bg-gradient-to-b from-customPlatinum to-customPlatinum2",
+    Diamond: "bg-gradient-to-r from-customDiamond via-customDiamond2 to-customDiamond3",
   };
 
   const handlePaginationChange = (page) => {
@@ -94,20 +94,20 @@ const Customer = () => {
               </div>
               <div className="pl-5 pt-2">
                 <div className="flex">
-                  <p className="font-medium font-sans text-xl rounded pl-4 pr-2 content-center">
+                  <h2 className="font-bold text-black-700 pl-4 pr-2">
                     {customer.CusName}
-                  </p>
+                  </h2>
                   <div
-                    className={`content-center text-xs border rounded-xl px-2 ${
+                    className={`content-center font-semibold text-xs border rounded-xl px-2 ${
                       levelColors[customer.CusLevel] || "bg-black"
                     }`}
                   >
                     {customer.CusLevel}
                   </div>
                 </div>
-                <div className="flex font-medium font-sans text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5">
+                <div className="flex font-semibold text-sm rounded py-0.5 px-4 mr-1/2 pb-2.5">
                   <h4>Email:</h4>
-                  <p className="font-medium font-sans text-sm rounded pl-1">
+                  <p className="font-semibold text-sm rounded pl-1">
                     {customer.CusEmail}
                   </p>
                 </div>
