@@ -4,7 +4,7 @@ import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
-import { Button } from "@nextui-org/react";
+
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
