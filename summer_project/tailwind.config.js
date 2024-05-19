@@ -11,10 +11,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        'custom-silver': '#BAB4B4',
-        'custom-yellow': '#FFE455',
-        'custom-platinum': '#34A0B4',
-        'custom-diamond': '#D678FF',
+        customGray: '#BAB4B4',
+        customGray2: '#C5C5C5',
+        customYellow: '#FFE455',
+        customYellow2: '#FFD596',
+        customYellow3: '#FFD39F',
+        customPlatinum: '#34A0B4',
+        customPlatinum2: '#52D6DE',
+        customDiamond: '#BF00FF',
+        customDiamond2: '#D678FF',
+        customDiamond3: '#F1BAFF',
       },
     },
   },
