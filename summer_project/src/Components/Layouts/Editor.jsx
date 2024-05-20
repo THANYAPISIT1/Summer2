@@ -5,7 +5,7 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 const  Editor = () =>{
     const [datas , setDatas] = useState();
     return (
-      <div className="ml-64">
+      <div className="ml-64 ">
         <CKEditor
           editor={ClassicEditor}
           data=""
@@ -19,7 +19,6 @@ const  Editor = () =>{
         />
         <div>
             <br />
-            <h1>{datas}</h1>
         </div>
       </div>
     );
