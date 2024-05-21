@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Sidebar from "../../Components/Layouts/Sidebar.jsx";
 import TopNav from "../../Components/Layouts/TopNav.jsx";
 import Editor from "../../Components/Layouts/Editor.jsx";
-import NavbarTemplate from "../../Components/Layouts/NavbarTemplate.jsx";
+
 
 const Template_editor = () => {
   
@@ -55,15 +55,8 @@ const Template_editor = () => {
       <Sidebar />
       <TopNav />
       <div className="mt-16">
-<<<<<<< HEAD
-        <NavbarTemplate/>
-      <Editor />
-      </div>
-=======
         <Navbar onDataChange={handleNavbarDataChange} onPost={postData} />
         <Editor onDataChange={handleEditorDataChange} />
-        
->>>>>>> e4fc2c6c2d297175a06b9bdc2a4134bebd41cb27
       </div>
     </div>
 
