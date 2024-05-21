@@ -1,22 +1,26 @@
 /** @type {import('tailwindcss').Config} */
+const { nextui } = require("@nextui-org/react");
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
     'node_modules/preline/dist/*.js',
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
-       colors: {
-        'custom-blue': '#0085FF', 
-        'custom-yellow': '#FFE455',
-        'custom-silver': '#BAB4B4',
-        'custom-platinum': '#34A0B4',
-        'custom-diamond': '#D678FF',
-      },
-      borderRadius: {
-        custom: '13px',
+      colors: {
+        customGray: '#BAB4B4',
+        customGray2: '#C5C5C5',
+        customYellow: '#FFE455',
+        customYellow2: '#FFD596',
+        customYellow3: '#FFD39F',
+        customPlatinum: '#34A0B4',
+        customPlatinum2: '#52D6DE',
+        customDiamond: '#BF00FF',
+        customDiamond2: '#D678FF',
+        customDiamond3: '#F1BAFF',
       },
     },
   },
@@ -24,6 +28,7 @@ export default {
   
   plugins: [
     require('preline/plugin'),
+    nextui()
   ],
   variants: {
     extend:{

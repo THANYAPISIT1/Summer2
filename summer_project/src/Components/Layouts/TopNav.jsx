@@ -1,7 +1,15 @@
 import {FaSearch,FaBell,FaUserCircle} from 'react-icons/fa'
-import { Link,useLocation  } from 'react-router-dom';
+import { Link,useLocation,useNavigate } from 'react-router-dom';
 
 const TopNav = () => {
+
+    const handlelogout = () =>{
+        
+        localStorage.removeItem('token');
+        navigate('/login')
+    }
+
+    const navigate = useNavigate();
 
     const location = useLocation();
 
@@ -20,7 +28,7 @@ const TopNav = () => {
 
 
     return (
-        <nav className="fixed top-0 right-0 left-0 bg-gray-800 px-4 py-3 flex justify-between">
+        <nav className="fixed top-0 right-0 left-0 bg-gray-800 px-4 py-3 flex justify-between z-[100]">
             <div className='my-3 mb-4 ml-3 text-white font-bold'>
                 <h1 className="text">{getPageName().toUpperCase()}</h1>
             </div>
@@ -40,7 +48,7 @@ const TopNav = () => {
                             <ul className='py-2 text-sm text-gray-950'>
                                 <li><Link to=''>Profile</Link></li>
                                 <li><Link to=''>Setting</Link></li>
-                                <li><Link to='/login'>Log out</Link></li>
+                                <li onClick={handlelogout}>Log out</li>
                             </ul>
                         </div>
                     </button>
