@@ -4,6 +4,7 @@ import TopNav from '../../Components/Layouts/TopNav';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
+import { Button } from "@nextui-org/react";
 
 function AddNewCustomer() {
   const [name, setName] = useState('');
@@ -43,6 +44,7 @@ function AddNewCustomer() {
         }
       );
       console.log('Response:', response);
+
       setMessage('Customer created successfully!');
 
       setName('');
@@ -54,6 +56,7 @@ function AddNewCustomer() {
       }, 2000);
 
     } catch (error) {
+      console.log(name);
       console.error('Error creating customer:', error);
       setMessage('Error creating customer. Please try again.'); // Set error message
     }
@@ -62,6 +65,7 @@ function AddNewCustomer() {
   const handleCancel = () => {
     navigate('/customers')
   };
+  
 
   return (
     <div>
@@ -110,17 +114,20 @@ function AddNewCustomer() {
           <div className='flex flex-row-reverse gap-4 mt-4'>
             <button
               type="submit"
+              
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
               Save
             </button>
+
             <button
               type="button"
               onClick={handleCancel}
               className="bg-white hover:bg-red-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
+
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       </div>
