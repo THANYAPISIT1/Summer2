@@ -23,3 +23,4 @@ const Editor = ({ defaultContent, onDataChange }) => {
 };
 
 export default Editor;
+
