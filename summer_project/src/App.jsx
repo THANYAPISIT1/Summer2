@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Pages/LoginPages/Login";
 import Register from "./Pages/LoginPages/Register";
 import Broadcast from "./Pages/Broadcasts/Broadcast";
@@ -8,8 +8,6 @@ import AddNewCustomer from "./Pages/Customers/AddNewCustomer";
 import Template from "./Pages/Templates/Template";
 import Template_editor from "./Pages/Templates/Template_editor";
 import CustomerEdit from "./Pages/Customers/CustomerEdit";
-import BCContent from "./Pages/Broadcasts/BCContent";
-import BCReview from "./Pages/Broadcasts/BCReview";
 import TestingGround from "./TestingGround";
 import CtrBroadcast from "./Pages/Broadcasts/CtrBroadcast";
 import Admin from "./Pages/Admin/Admin";
@@ -19,29 +17,45 @@ import DetailAndEditAdmin from "./Pages/Admin/DetailandEditAdmin";
 import UpdateTemplate from "./Pages/Templates/TemplateEdit";
 
 function App() {
+  const ProtectedRoutes = ({ children }) => {
+    const token = localStorage.getItem('token');
+    
+    if (!token) {
+      return <Navigate to="/login" />;
+    }
+    
+    return children;
+  };
+
   return (
     <div>
       <Routes>
-        <Route path="DetailAndEditAdmin" element={<DetailAndEditAdmin />} />
-        <Route path="/AdminEdit" element={<AdminEdit />} />
-        <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
-
-        <Route path="/Admin" element={<Admin />} />
-
-        <Route path="/template/create" element={<Template_editor />} />
-        <Route path="/template/edit/:TID" element={<UpdateTemplate />} />
-        <Route path="/template" element={<Template />} />
-        <Route path="test" element={<TestingGround />} />
-        <Route path="/" element={<Broadcast />} />
-        <Route path="create-broadcast" element={<CtrBroadcast />} />
-        <Route path="broadcast/content" element={<BCContent />} />
-        <Route path="broadcast/review" element={<BCReview />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route path="customers" element={<Customer />} />
-        <Route path="customer/edit/:CusID" element={<CustomerEdit />} />
-        <Route path="customer/add" element={<AddNewCustomer />} />
 
+        {/* Wrap all protected routes in the ProtectedRoutes component */}
+        <Route
+          path="*"
+          element={
+            <ProtectedRoutes>
+              <Routes>
+                <Route path="/" element={<Broadcast />} />
+                <Route path="DetailAndEditAdmin" element={<DetailAndEditAdmin />} />
+                <Route path="/AdminEdit" element={<AdminEdit />} />
+                <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
+                <Route path="/Admin" element={<Admin />} />
+                <Route path="/template/create" element={<Template_editor />} />
+                <Route path="/template/edit/:TID" element={<UpdateTemplate />} />
+                <Route path="/template" element={<Template />} />
+                <Route path="test" element={<TestingGround />} />
+                <Route path="create-broadcast" element={<CtrBroadcast />} />
+                <Route path="customers" element={<Customer />} />
+                <Route path="customer/edit/:CusID" element={<CustomerEdit />} />
+                <Route path="customer/add" element={<AddNewCustomer />} />
+              </Routes>
+            </ProtectedRoutes>
+          }
+        />
       </Routes>
     </div>
   );
