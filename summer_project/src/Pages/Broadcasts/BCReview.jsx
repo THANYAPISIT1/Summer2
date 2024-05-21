@@ -21,9 +21,9 @@ const BCReview = () =>{
                         <div className="flex items-center my-3">
                             <div className="flex items-center my-4 w-full max-w-auto border p-4 rounded-md">
                                 <h2 className="font-semibold">Select</h2>
-                                <span className="ml-4 bg-gray-300 hover:bg-gray-400 bg-transparent hover: border p-2 rounded-lg underline underline-offset-4">
+                                <button className="ml-4 bg-gray-300 hover:bg-gray-400 bg-transparent hover: border p-2 rounded-lg underline underline-offset-4">
                                     Get from Recipients
-                                </span>
+                                </button>
                             </div>
                         </div>
                     </div>
