@@ -44,7 +44,7 @@ function App() {
                 <Route path="/AdminEdit" element={<AdminEdit />} />
                 <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
                 <Route path="/Admin" element={<Admin />} />
-                <Route path="/template/create" element={<Template_editor />} />
+                <Route path="template/create" element={<Template_editor />} />
                 <Route path="/template/edit/:TID" element={<UpdateTemplate />} />
                 <Route path="/template" element={<Template />} />
                 <Route path="test" element={<TestingGround />} />

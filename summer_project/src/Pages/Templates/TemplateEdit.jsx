@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Sidebar from "../../Components/Layouts/Sidebar.jsx";
 import TopNav from "../../Components/Layouts/TopNav.jsx";
 import Editor from "../../Components/Layouts/Editor.jsx";
-import NavbarTemplate from "../../Components/Layouts/NavbarTemplate.jsx";
 
 const UpdateTemplate = () => {
   const { TID } = useParams();
