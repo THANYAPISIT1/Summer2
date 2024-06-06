@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
 import { Pagination } from "@nextui-org/react";
 
-const Broadcast = () => {
+const Transection = () => {
     const [broadcasts, setBroadcasts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -121,11 +121,8 @@ const Broadcast = () => {
             <Sidebar />  
             <div className='mt-16'>
                 <section className="ml-64">
-                    <header className='flex justify-between static'>
-                        <div className="text-xl p-8 font-bold">Broadcast</div>
-                        <Link to='/create-broadcast' className='mt-4'>
-                            <Createbtn className='mr-4 border mt-8 h-10 items-center w-40 p-2 rounded-md text-blue-600 hover:bg-blue-500 hover:text-white' />
-                        </Link>
+                    <header className='static'>
+                        <div className="text-xl p-8 font-bold">Transection</div>
                     </header>
                     <hr />
                     <Filter onStatusChange={handleStatusChange}
@@ -155,12 +152,12 @@ const Broadcast = () => {
                                     </div>
                                     <div>
                                         {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Schedule' ? (
-                                            <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
-                                                Can edit
+                                            <button className="rounded-md h-10 text-sm text-white p-2 bg-red-700 items-center">
+                                                Massage Send Error
                                             </button>
                                         ) : (
-                                            <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
-                                                Message has been sent 
+                                            <button className="rounded-md h-10 text-sm text-white p-2 bg-green-700  items-center">
+                                                Message send successfully
                                             </button>
                                         )}
                                         <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
@@ -188,4 +185,4 @@ const Broadcast = () => {
     );
 };
 
-export default Broadcast;
+export default Transection;

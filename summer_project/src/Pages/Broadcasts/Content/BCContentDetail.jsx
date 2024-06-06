@@ -2,12 +2,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import Sidebar from "../../Components/Layouts/Sidebar.jsx";
-import TopNav from "../../Components/Layouts/TopNav.jsx";
-import Editor from "../../Components/Layouts/Editor.jsx";
-import NavbarTemplate from "../../Components/Layouts/NavbarTemplate.jsx";
+import Sidebar from "../../../Components/Layouts/Sidebar.jsx";
+import TopNav from "../../../Components/Layouts/TopNav.jsx";
+import Editor from "../../../Components/Layouts/Editor.jsx";
+import NavbarTemplate from "../../../Components/Layouts/NavbarTemplate.jsx";
 
-const UpdateTemplate = () => {
+const BCCContentDetail = () => {
   const { TID } = useParams();
   const navigate = useNavigate();
 
@@ -82,11 +82,11 @@ const UpdateTemplate = () => {
       <TopNav />
       <div className="mt-16">
         {/* Pass data to Navbar and Editor */}
-        <NavbarTemplate defaultName={templateData.TName} onDataChange={handleNavbarDataChange} onPost={updateTemplate} />
-        <Editor defaultContent={templateData.TContent} onDataChange={handleEditorDataChange} />
+          <NavbarTemplate defaultName={templateData.TName} onDataChange={handleNavbarDataChange} onPost={updateTemplate} />
+          <Editor defaultContent={templateData.TContent} onDataChange={handleEditorDataChange} />
       </div>
     </div>
   );
 };
 
-export default UpdateTemplate;
+export default BCCContentDetail;

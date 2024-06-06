@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavbarTemplate = ({ defaultName, onDataChange, onPost }) => {
+  const [TName, setTName] = useState(defaultName || "");
 
   const handleChange = (event) => {
     const newValue = event.target.value;
@@ -13,10 +15,10 @@ const NavbarTemplate = ({ defaultName, onDataChange, onPost }) => {
   };
 
   return (
-    <div class="  mt-10 pt-8 pb-4">
+    <div className="  mt-10 pt-8 pb-4">
       <div className=" text-black flex flex-row">
         <div className="basis-5/6 pl-8  ml-64">
-          <input type="text" value={stringValue} onChange={handleChange} />
+          <input type="text" value={defaultName} onChange={handleChange} />
         </div>
         <div className="flex content-center ">
           <div className=" ">
@@ -26,11 +28,9 @@ const NavbarTemplate = ({ defaultName, onDataChange, onPost }) => {
               </Link>
             </button>
           </div>
-          <div className="">
-            <button className=" text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none px-2 mr-10 pl-2 pr-2 rounded-md ">
+            <button className=" text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none px-2 mr-10 pl-2 pr-2 rounded-md " onClick={handleSave}>
               Save
             </button>
-          </div>
         </div>
       </div>
     </div>

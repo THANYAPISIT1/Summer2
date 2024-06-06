@@ -7,7 +7,7 @@ import Editor from "../../Components/Layouts/Editor.jsx";
 import NavbarTemplate from "../../Components/Layouts/NavbarTemplate.jsx";
 
 
-const Template_editor = () => {
+const TemplateCreate = () => {
   
   const [data, setData] = useState({
     editorData: "", 
@@ -64,4 +64,4 @@ const Template_editor = () => {
   );
 };
 
-export default Template_editor;
+export default TemplateCreate;

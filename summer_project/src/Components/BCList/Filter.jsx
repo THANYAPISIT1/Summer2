@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import {DateRangePicker} from "@nextui-org/react";
-
+import { DateRangePicker } from "@nextui-org/react";
+import axios from 'axios';
 
 const customStyles = {
   control: base => ({
@@ -11,103 +11,79 @@ const customStyles = {
     borderRadius: '0.375rem', 
     minHeight: 'calc(2.25rem + 2px)', 
     boxShadow: 'none', 
-
   }),
 };
 
-const Filter = ({ onFilterChange }) => {
-
-    const [value, setValue] = useState({ 
-        startDate: new Date(), 
-        endDate: new Date().setMonth(11) 
-    }); 
-    
-    const [filterByTags, setFilterByTags] = useState([
-        {label:'Silver', value:'silver'},
-        {label:'Gold', value:'Gold'},
-        {label:'Platinum', value:'Platinum'},
-        {label:'Diamond', value:'Diamond'}
-    ]);
-
-    const [filterByStatus, setFilterByStatus] = useState([
-        {label:'All newsletter', value:'All newsletter'},
-        {label:'Draft', value:'Draft'},
-        {label:'Sent', value:'Sent'},
-        {label:'Scheduled', value:'Scheduled'}
-    ]);
-
-    const [filterByLastUpdate, setFilterByLastUpdate] = useState([
-        {label:'Last Updated', value:'Last Updated'},
-        {label:'Email Sent', value:'Email Sent'},
-        {label:'Date Sent', value:'Date Sent'},
-        {label:'Name', value:'Name'},
-        {label:'Date Created', value:'Date Created'},
-    ]);
-
+const Filter = ({ onStatusChange, onDateRangeChange, onTagChange, onFilterChange }) => {
     const [selectedTags, setSelectedTags] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState(null);
-    const [selectedLastUpdate, setSelectedLastUpdate] = useState(null);
+    const [selectedDateRange, setSelectedDateRange] = useState([new Date(), new Date().setMonth(11)]);
+    const [selectedFilter, setSelectedFilter] = useState(null);
+    const [filterByTags, setFilterByTags] = useState([]);
 
-    const handleValueChange = (newValue) => {
-        console.log("Selected Date:", newValue.startDate, newValue.endDate)
-        setValue(newValue);
-        onFilterChange({
-          selectedTags,
-          selectedStatus,
-          selectedLastUpdate,
-          selectedDateRange: newValue,
-        });
-      };
-  
-    const handleTagsChange = (newValue) => {
-      setSelectedTags(newValue);
-      onFilterChange({
-        selectedTags: newValue,
-        selectedStatus,
-        selectedLastUpdate,
-        selectedDateRange: value,
-      });
-    };
-  
-    const handleStatusChange = (newValue) => {
-      setSelectedStatus(newValue);
-      onFilterChange({
-        selectedTags,
-        selectedStatus: newValue,
-        selectedLastUpdate,
-        selectedDateRange: value,
-      });
-    };
-  
-    const handleLastUpdateChange = (newValue) => {
-      setSelectedLastUpdate(newValue);
-      onFilterChange({
-        selectedTags,
-        selectedStatus,
-        selectedLastUpdate: newValue,
-        selectedDateRange: value,
-      });
+    const fetchTags = async () => {
+        try {
+            const response = await axios.get('http://localhost:8000/broadcasts');
+            const tags = response.data.map(broadcasts => ({ label: broadcasts.BTag, value: broadcasts.BTag }));
+            setFilterByTags(tags);
+        } catch (error) {
+            console.error('Error fetching tags:', error);
+        }
     };
 
     useEffect(() => {
-        console.log("Selected Tags:", selectedTags);
-    }, [selectedTags]);
+        fetchTags();
+    }, []);
+
+    const filterByStatus = [
+        {label:'Draft', value:'Draft'},
+        {label:'Sent', value:'Sent'},
+        {label:'Schedule', value:'Schedule'}
+    ];
+
+    const filterByFilter = [
+        {label:'Last Updated', value:'Last Updated'},
+        {label:'Email Sent', value:'Email Sent'},
+        {label:'Name', value:'Name'}
+    ];
+
+    const handleDateRangeChange = (newValue) => {
+        setSelectedDateRange([newValue.startDate, newValue.endDate]);
+        onDateRangeChange([newValue.startDate, newValue.endDate]);
+    };
+
+    const handleTagsChange = (newValue) => {
+        setSelectedTags(newValue);
+        onTagChange(newValue);
+    };
+
+    const handleStatusChange = (newValue) => {
+        setSelectedStatus(newValue);
+        onStatusChange(newValue);
+    };
+
+    const handleFilterChange = (newValue) => {
+        setSelectedFilter(newValue);
+        onFilterChange(newValue);
+    };
+
+
 
     useEffect(() => {
         console.log("Selected Status:", selectedStatus);
     }, [selectedStatus]);
 
     useEffect(() => {
-        console.log("Selected Last Update:", selectedLastUpdate);
-    }, [selectedLastUpdate]);
-      
+        console.log("Selected Filter:", selectedFilter);
+    }, [selectedFilter]);
 
-    
-    return(
+    useEffect(() => {
+        console.log("Selected Date Range:", selectedDateRange);
+    }, [selectedDateRange]);
 
+    return (
         <div className='z-50'>
             <div className="flex flex-row">
-
                 <CreatableSelect  
                     placeholder={<div>Type</div>}
                     isClearable
@@ -121,8 +97,8 @@ const Filter = ({ onFilterChange }) => {
                 <DateRangePicker 
                     className="my-4 w-full max-w-64 mx-4" 
                     styles={customStyles}
-                    value={value} 
-                    onChange={handleValueChange}
+                    value={{ startDate: selectedDateRange[0], endDate: selectedDateRange[1] }}
+                    onChange={handleDateRangeChange}
                 />
 
                 <Select 
@@ -135,20 +111,17 @@ const Filter = ({ onFilterChange }) => {
                     onChange={handleTagsChange}
                 />
 
-
                 <CreatableSelect  
                     placeholder={<div>Filter</div>}
                     isClearable 
                     styles={customStyles} 
                     className="my-4 w-full max-w-64 mx-4" 
-                    options={filterByLastUpdate}
-                    value={selectedLastUpdate}
-                    onChange={handleLastUpdateChange}
+                    options={filterByFilter}
+                    value={selectedFilter}
+                    onChange={handleFilterChange}
                 />
-
             </div>
         </div>
-        
     );
 };
 
