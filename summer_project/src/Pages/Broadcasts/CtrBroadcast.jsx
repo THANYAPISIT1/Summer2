@@ -104,8 +104,10 @@ const CtrBroadcast = () => {
                         handlePrevious={handlePrevious} 
                         currentIndex={currentIndex} 
                         totalSteps={components.length} 
-                        setSelectedTemplate={setSelectedTemplate}
+                        selectedTID={selectedTID}
+                        selectedTName={selectedTName}
                         email={email}
+                        selectedLevel={selectedLevel}
                     />
                     </div>
                 </header>
