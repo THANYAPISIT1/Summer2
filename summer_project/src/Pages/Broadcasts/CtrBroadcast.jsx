@@ -20,6 +20,7 @@ const CtrBroadcast = () => {
     const [selectedTID, setSelectedTID] = useState(null);
     const [selectedTName, setSelectedTName] = useState(null);
     const [sqlDate, setSqlDate] = useState("");
+    const [fromName, setFromName] = useState("");
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -41,6 +42,10 @@ const CtrBroadcast = () => {
 
     const handleDateChange = (date) => {
         setSqlDate(date);
+    };
+
+    const handleFromNameChange = (event) => { // Function to handle changes in fromName input
+        setFromName(event.target.value);
     };
 
     const components = [
@@ -79,6 +84,7 @@ const CtrBroadcast = () => {
         console.log("Blacklist:", blacklist);
     };
 
+
     return (
         <div>
             <Sidebar />
@@ -91,7 +97,7 @@ const CtrBroadcast = () => {
                             <span className="text-base font-medium">{broadcastName}</span>
                             <IoPencil className='w-6 h-6 ml-2' />
                         </div>
-                        <input type="fromName" placeholder="From Email:" className="p-1 border mx-2 rounded-md"/>
+                        <input value={fromName} onChange={handleFromNameChange} placeholder="From Email:" className="p-1 border mx-2 rounded-md"/>
                     </div>
                     {/* Stepper */}
                     <div className="flex items-center">
@@ -121,6 +127,7 @@ const CtrBroadcast = () => {
                         selectedLevel={selectedLevel}
                         broadcastName={broadcastName}
                         sqlDate={sqlDate}
+                        fromName={fromName}
                     />
                     </div>
                 </header>

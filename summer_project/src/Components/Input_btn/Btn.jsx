@@ -1,6 +1,6 @@
 import axios from 'axios'; // Import Axios
 
-function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastName, email, selectedLevel , selectedTID, tag, blacklist, sqlDate }) {
+function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastName, email, selectedLevel , selectedTID, tag, blacklist, sqlDate, fromName }) {
   console.log(broadcastName, email, selectedLevel , selectedTID, tag,)
 
   const handleSubmit = async () => {
@@ -14,7 +14,7 @@ function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastNa
           BName: broadcastName,
           BSchedule: sqlDate, // get BSchedule
           BTag: tag,
-          BFrom: null, // get BFrom
+          BFrom: fromName, // get BFrom
           BRecipient: email || (selectedLevel ? selectedLevel.value : null),
           TID: selectedTID
 
