@@ -8,6 +8,7 @@ import Createbtn from '../../Components/BCList/Createbtn';
 import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
 import { Pagination } from "@nextui-org/react";
+import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem} from "@nextui-org/react";
 
 const Broadcast = () => {
     const [broadcasts, setBroadcasts] = useState([]);
@@ -154,18 +155,29 @@ const Broadcast = () => {
                                         <span className='bg-gray-200 py-2 px-3 rounded-lg text-xs'>{broadcast.BStatus}</span>
                                     </div>
                                     <div>
-                                        {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Schedule' ? (
+                                        {broadcast.BStatus === 'Draft' ? (
                                             <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
-                                                Can edit
+                                                Continue editing {`>`}
                                             </button>
                                         ) : (
                                             <button className="rounded-md h-10 text-sm p-2 bg-teal-500 hover:bg-teal-700 text-white items-center">
                                                 Message has been sent 
                                             </button>
                                         )}
-                                        <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
-                                            <BsThreeDots />
-                                        </button>
+                                        <Dropdown>
+                                            <DropdownTrigger>
+                                                <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
+                                                    <BsThreeDots />
+                                                </button>
+                                            </DropdownTrigger>
+                                            <DropdownMenu aria-label="Static Actions">
+                                                <DropdownItem key="duplicate">Duplicate</DropdownItem>
+                                                <DropdownItem key="copy to">Copy to</DropdownItem>
+                                                <DropdownItem key="delete" className="text-danger" color="danger">
+                                                    Delete broadcast
+                                                </DropdownItem>
+                                            </DropdownMenu>
+                                        </Dropdown>
                                     </div>
                                 </div>
                             </div>

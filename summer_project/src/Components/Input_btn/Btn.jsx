@@ -1,4 +1,37 @@
-function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, email, selectedLevel , selectedTID, selectedTName }) {
+import axios from 'axios'; // Import Axios
+
+function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastName, email, selectedLevel , selectedTID, tag, blacklist, sqlDate }) {
+  console.log(broadcastName, email, selectedLevel , selectedTID, tag,)
+
+  const handleSubmit = async () => {
+
+    const authToken = localStorage.getItem('token'); // Retrieve the token from localStorage
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/broadcasts',
+        {
+          BName: broadcastName,
+          BSchedule: sqlDate, // get BSchedule
+          BTag: tag,
+          BFrom: null, // get BFrom
+          BRecipient: email || (selectedLevel ? selectedLevel.value : null),
+          TID: selectedTID
+
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        }
+      );
+      console.log('Response:', response);
+
+    } catch (error) {
+      console.error('Error creating broadcast:', error);
+    }
+  };
+
   return (
       <div className="flex ml-2">
         <button
@@ -29,7 +62,7 @@ function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, email, sele
           <button
             type="button"
             className="inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-            // onClick={submit}
+            onClick={handleSubmit}
           >
             Submit
           </button>

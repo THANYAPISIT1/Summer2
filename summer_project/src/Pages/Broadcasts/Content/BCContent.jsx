@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const BCContent = ({ setContentName, setSelectedTemplate  }) => {
+const BCContent = ({ setContentName, setSelectedTemplate }) => {
   const [templates, setTemplates] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -38,7 +38,8 @@ const BCContent = ({ setContentName, setSelectedTemplate  }) => {
 
   const handleTemplateClick = (templateId, templateName) => {
     const selectedTemplate = templates.find(
-      (template) => template.TID === templateId
+      (template) => template.TID === templateId,
+      (template) => template.TName ===  templateName
     );
     setSelectedTID(templateId);
     setSelectedTName(templateName);
@@ -67,7 +68,7 @@ const BCContent = ({ setContentName, setSelectedTemplate  }) => {
       setCurrentPage(currentPage - 1);
     }
   };
-
+  
   return (
     <div>
       <div className="p-6">
@@ -101,7 +102,7 @@ const BCContent = ({ setContentName, setSelectedTemplate  }) => {
                         ? "bg-blue-200"
                         : ""
                     }`}
-                    onClick={() => handleTemplateClick(template.TID)}
+                    onClick={() => handleTemplateClick(template.TID,template.TName)}
                     onDoubleClick={() => handleTemplateDoubleClick(template.TID)}
                   >
                     {template.TName}

@@ -15,9 +15,11 @@ const CtrBroadcast = () => {
     const [selectedLevel, setSelectedLevel] = useState("");
     const [email, setEmail] = useState("");
     const [blacklist, setBlacklist] = useState("");
+    const [tag, setTag] = useState("");
     const [contentName, setContentName] = useState("Example");
     const [selectedTID, setSelectedTID] = useState(null);
     const [selectedTName, setSelectedTName] = useState(null);
+    const [sqlDate, setSqlDate] = useState("");
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -37,12 +39,17 @@ const CtrBroadcast = () => {
         setSelectedTName(TName);
     };
 
+    const handleDateChange = (date) => {
+        setSqlDate(date);
+    };
+
     const components = [
         <BCRecipients
           setRecipientTitle={setRecipientTitle}
           selectedLevel={selectedLevel}
           setSelectedLevel={setSelectedLevel}
           email={email}
+          setTag={setTag}
           setEmail={setEmail}
           blacklist={blacklist}
           setBlacklist={setBlacklist}
@@ -52,10 +59,10 @@ const CtrBroadcast = () => {
             recipientTitle={recipientTitle}
             selectedLevel={selectedLevel}
             email={email}
-            blacklist={blacklist}
             contentName={contentName}
             selectedTID={selectedTID}
             selectedTName={selectedTName}
+            onDateChange={handleDateChange}
         />,      
     ];
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -79,9 +86,12 @@ const CtrBroadcast = () => {
             <div className="mt-16 ">
                 <section className="ml-64 max-w-full">
                 <header className="flex justify-between items-center py-8 px-6 border-b-2">
-                    <div className="flex items-center cursor-pointer" onClick={handleOpenModal}>
-                    <span className="text-base font-medium">{broadcastName}</span>
-                    <IoPencil className='w-6 h-6 ml-2' />
+                    <div className="flex">
+                        <div className="flex items-center cursor-pointer" onClick={handleOpenModal}>
+                            <span className="text-base font-medium">{broadcastName}</span>
+                            <IoPencil className='w-6 h-6 ml-2' />
+                        </div>
+                        <input type="fromName" placeholder="From Email:" className="p-1 border mx-2 rounded-md"/>
                     </div>
                     {/* Stepper */}
                     <div className="flex items-center">
@@ -105,9 +115,12 @@ const CtrBroadcast = () => {
                         currentIndex={currentIndex} 
                         totalSteps={components.length} 
                         selectedTID={selectedTID}
-                        selectedTName={selectedTName}
                         email={email}
+                        tag={tag}
+                        blacklist={blacklist}
                         selectedLevel={selectedLevel}
+                        broadcastName={broadcastName}
+                        sqlDate={sqlDate}
                     />
                     </div>
                 </header>

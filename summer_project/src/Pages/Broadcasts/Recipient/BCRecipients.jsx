@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Popover, PopoverTrigger, Button } from "@nextui-org/react";
 import Select from "react-select";
 
-const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, email, setEmail, blacklist, setBlacklist }) => {
+const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, email ,setTag, tag , setEmail, blacklist, setBlacklist }) => {
   const [isMatchConOpen, setIsMatchConOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(email ? "email" : selectedLevel ? "level" : null);
   const [isEveryCustomerOpen, setIsEveryCustomerOpen] = useState(false);
@@ -16,7 +16,7 @@ const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, emai
 
   useEffect(() => {
     if (selectedOption === "level" && selectedLevel) {
-      console.log(`Selected option: Level: ${selectedLevel.label}`);
+      console.log(`Selected option: Level: ${selectedLevel.value}`);
     } else if (selectedOption) {
       console.log(`Selected option: ${selectedOption}`);
     }
@@ -25,7 +25,7 @@ const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, emai
   const handleChange = (option) => {
     setSelectedLevel(option);
     if (option) {
-      setRecipientTitle(`Send by Level: ${option.label}`);
+      setRecipientTitle(`Send by Level: ${option.value}`);
       setSelectedOption("level");
     }
   };
@@ -68,6 +68,12 @@ const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, emai
     setBlacklist(e.target.value);
     setTimeout(() => {
       console.log("Conditions blacklist:", e.target.value);
+    }, 3000);
+  };
+  const handleTag = (e) => {
+    setTag(e.target.value);
+    setTimeout(() => {
+      console.log("Tag:", e.target.value);
     }, 3000);
   };
 
@@ -130,7 +136,7 @@ const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, emai
                 )}
                 {(selectedOption === "level" || selectedLevel) && (
                   <Select
-                    isMulti
+                    // isMulti
                     placeholder="Select Level"
                     options={levelOptions}
                     value={selectedLevel}
@@ -141,15 +147,23 @@ const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, emai
               </div>
             </div>
           )}
-          <div className="mt-4">
-            <h1 className="font-medium">Conditions blacklist</h1>
-            <input
-              type="text"
-              placeholder="Add customer name"
-              value={blacklist}
-              onChange={handleBlacklistChange}
-              className="border border-gray-300 rounded-md p-2 my-3 w-1/4"
-            />
+            <div className="mt-4">
+              <h1 className="font-medium">Conditions blacklist</h1>
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  placeholder="Add customer name"
+                  value={blacklist}
+                  onChange={handleBlacklistChange}
+                  className="border border-gray-300 rounded-md p-2 my-3 w-1/4"
+                />
+                <input type="text" 
+                  placeholder="Input tags"
+                  value={tag}
+                  onChange={handleTag}
+                  className="border border-gray-300 rounded-md p-2 my-3 w-1/6 ml-4"
+                />
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@nextui-org/react";
 import { IoPencil } from "react-icons/io5";
+import { IoCheckmarkSharp } from "react-icons/io5";
 
 const Header = ({ broadcastName, handleOpenModal, stepCompletion }) => {
   return (

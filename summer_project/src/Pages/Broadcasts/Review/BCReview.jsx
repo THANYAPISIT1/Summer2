@@ -1,8 +1,30 @@
+import { useState, useEffect } from "react";
 import { IoPeople } from "react-icons/io5";
 import { IoDocumentSharp } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
+import { FaClock } from "react-icons/fa6";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "react-time-picker/dist/TimePicker.css";
 
-const BCReview = ({ recipientTitle, contentName }) => {
+
+const BCReview = ({ recipientTitle, contentName, onDateChange }) => {
+  const [bschedule, setBSchedule] = useState(new Date());
+  const [sqlDate, setSqlDate] = useState("");
+
+  useEffect(() => {
+    const toSqlDate = (date) => {
+      const isoString = date.toISOString();
+      const [datePart] = isoString.split("T");
+      return `${datePart}`;
+    };
+
+    setSqlDate(toSqlDate(bschedule));
+    onDateChange(sqlDate);
+  }, [bschedule,onDateChange]);
+
+  console.log(sqlDate);
+
   return (
     <div>
       {/* Content */}
@@ -46,6 +68,27 @@ const BCReview = ({ recipientTitle, contentName }) => {
                 {contentName}
               </button>
             </div>
+          </div>
+          <hr />
+          <div className="mt-4">
+            <div className="flex items-center">
+              <FaClock size="30px"/>
+              <h1 className="text-xm font-bold ml-2">Schedule</h1>
+            </div>
+            <div className="flex items-center my-4 w-full max-w-auto border p-4 rounded-md">
+              <div className="mr-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Select Date
+                </label>
+                <DatePicker
+                  selected={bschedule}
+                  onChange={(date) => setBSchedule(date)}
+                  dateFormat="MMMM d, yyyy"
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+            </div>
+            <div />
           </div>
         </div>
       </div>
