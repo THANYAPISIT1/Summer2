@@ -21,6 +21,7 @@ const CtrBroadcast = () => {
     const [selectedTName, setSelectedTName] = useState(null);
     const [sqlDate, setSqlDate] = useState("");
     const [fromName, setFromName] = useState("");
+    const [recipientEveryone, setRecipientEveryone] = useState("");
 
     const handleOpenModal = () => {
         setIsModalOpen(true);
@@ -58,6 +59,7 @@ const CtrBroadcast = () => {
           setEmail={setEmail}
           blacklist={blacklist}
           setBlacklist={setBlacklist}
+          setRecipientEveryone={setRecipientEveryone}
         />,
         <BCContent setContentName={setContentName} setSelectedTemplate={setSelectedTemplate} />,
         <BCReview
@@ -128,6 +130,7 @@ const CtrBroadcast = () => {
                         broadcastName={broadcastName}
                         sqlDate={sqlDate}
                         fromName={fromName}
+                        recipientEveryone={recipientEveryone}
                     />
                     </div>
                 </header>

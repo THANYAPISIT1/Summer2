@@ -12,29 +12,31 @@ const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedTags, setSelectedTags] = useState([]); // Add state for selected tags
+
+  const fetchCustomers = async (page, tags) => {
+    try {
+      const authToken = localStorage.getItem('token');
+      const tagsQuery = tags.length > 0 ? `&selectedLevel=${tags.map(tag => tag.value).join(',')}` : '';
+      const response = await axios.get(`http://localhost:8000/customers?page=${page}${tagsQuery}`, {
+        headers: {
+          'Authorization': `Bearer ${authToken}`
+        }
+      });
+
+      const data = response.data;
+      setCustomers(data.customers);
+      setCurrentPage(data.currentPage);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+      alert(`Error fetching customers: ${error.response?.data?.message || error.message}`);
+    }
+  };
 
   useEffect(() => {
-    const fetchCustomers = async () => {
-      try {
-        const authToken = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:8000/customers?page=${currentPage}`, {
-          headers: {
-            'Authorization': `Bearer ${authToken}`
-          }
-        });
-        
-        const data = response.data;
-        setCustomers(data.customers);
-        setCurrentPage(data.currentPage);
-        setTotalPages(data.totalPages);
-      } catch (error) {
-        console.error('Error fetching customers:', error);
-        alert(`Error fetching customers: ${error.response?.data?.message || error.message}`);
-      }
-    };
-
-    fetchCustomers();
-  }, [currentPage]); 
+    fetchCustomers(currentPage, selectedTags);
+  }, [currentPage, selectedTags]); // Add selectedTags as a dependency
 
   const customStyles = {
     control: (base) => ({
@@ -64,6 +66,11 @@ const Customer = () => {
     setCurrentPage(page);
   };
 
+  const handleTagChange = (selectedOptions) => {
+    setSelectedTags(selectedOptions || []);
+    setCurrentPage(1); // Reset to page 1 whenever tags are changed
+  };
+
   return (
     <div>
       <TopNav />
@@ -84,6 +91,7 @@ const Customer = () => {
             isMulti
             className="basic-multi-select my-4 w-full max-w-64 mx-4"
             styles={customStyles} 
+            onChange={handleTagChange} // Add onChange handler
           />
         </div>
         {customers.map(customer => (
@@ -127,7 +135,7 @@ const Customer = () => {
             isCompact
             showControls
             total={totalPages}
-            initialPage={currentPage}
+            page={currentPage}
             onChange={handlePaginationChange}
           />
         </footer>

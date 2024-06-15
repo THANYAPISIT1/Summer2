@@ -1,119 +1,15 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../../Components/Layouts/Sidebar';
 import TopNav from '../../Components/Layouts/TopNav';
-import { FaFileAlt } from "react-icons/fa";
-import Filter from '../../Components/BCList/Filter';
-import Createbtn from '../../Components/BCList/Createbtn';
-import { Link } from 'react-router-dom';
-import { BsThreeDots } from "react-icons/bs";
 import { Pagination } from "@nextui-org/react";
 
 const Transection = () => {
-    const [broadcasts, setBroadcasts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const [loading, setLoading] = useState(false);
-
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [selectedStatus, setSelectedStatus] = useState(null);
-    const [selectedFilter, setSelectedFilter] = useState(null);
-    const [selectedDateRange, setSelectedDateRange] = useState({
-        startDate: new Date(2000, 0, 1), // Set start date to January 1, 2000
-        endDate: new Date()
-    });
-    useEffect(() => {
-        fetchBroadcasts(currentPage);
-    }, [currentPage, selectedTags, selectedStatus, selectedFilter, selectedDateRange]);
-
-    const fetchBroadcasts = async (page) => {
-        setLoading(true);
-        try {
-            const authToken = localStorage.getItem('token');
-
-            const params = {
-                page,
-            };
-
-            if (selectedStatus) {
-                params.status = selectedStatus.value;
-            }
-
-            if ( selectedDateRange.startDate && selectedDateRange.endDate) {
-                params.daterange = `${selectedDateRange.startDate.toISOString()},${selectedDateRange.endDate.toISOString()}`;
-            }
-
-            if (selectedTags.length > 0) {
-                params.tag = selectedTags.map(tag => tag.value).join(',');
-            }
-
-            if (selectedFilter) {
-                params.filter = selectedFilter.value;
-            }
-
-            const response = await axios.get('http://localhost:8000/broadcasts', {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`
-                },
-                params: params
-            });
-
-            const data = response.data;
-
-            // Format BUpdate date before setting the broadcasts state
-            const formattedBroadcasts = data.broadcasts.map(broadcast => ({
-                ...broadcast,
-                BUpdate: formatDate(broadcast.BUpdate)
-            }));
-
-            setBroadcasts(formattedBroadcasts);
-            setCurrentPage(page);
-            setTotalPages(data.totalPages);
-        } catch (error) {
-            console.log('Error fetching broadcasts:', error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    // Function to format date to "dd/mm/yyyy hh:mm"
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const year = date.getFullYear();
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        
-        return `${day}/${month}/${year} ${hours}:${minutes}`;
-    };
-    
-    const handlePaginationChange = async (page) => {
-        fetchBroadcasts(page);
-    };
-
-    const handleStatusChange = (status) => {
-        setSelectedStatus(status);
-    };
-
-    const handleDateRangeChange = (dateRange) => {
-        setSelectedDateRange(dateRange);
-    };
-
-    const handleTagChange = (tags) => {
-        setSelectedTags(tags);
-    };
-
-    const handleFilterChange = (filter) => {
-        setSelectedFilter(filter);
-    };
-
-    useEffect(() => {
-        console.log("Selected Tags:", selectedTags);
-        console.log("Selected Status:", selectedStatus);
-        console.log("Selected Filter:", selectedFilter);
-        console.log("Selected Date Range:", selectedDateRange);
-    }, [selectedTags, selectedStatus, selectedFilter, selectedDateRange]);
+    // Dummy data for demonstration
+    const transactions = [
+        { BName: 'Broadcast 1', BReceive: 'User 1', BUpdate: '01/01/2024', TName: 'Transaction 1', ProcessedAt: '01/01/2024 10:00' },
+        { BName: 'Broadcast 2', BReceive: 'User 2', BUpdate: '02/01/2024', TName: 'Transaction 2', ProcessedAt: '02/01/2024 11:00' },
+        // Add more rows as needed
+    ];
 
     return (
         <div className='relative'>
@@ -125,61 +21,41 @@ const Transection = () => {
                         <div className="text-xl p-8 font-bold">Transection</div>
                     </header>
                     <hr />
-                    <Filter onStatusChange={handleStatusChange}
-                        onDateRangeChange={handleDateRangeChange}
-                        onTagChange={handleTagChange}
-                        onFilterChange={handleFilterChange} />
-                    <hr />
+                    <div className='p-8'>
+                        <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <table className="w-full text-sm text-left rtl:text-right text-gray-800 dark:text-gray-700">
+                                <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
+                                    <tr >
+                                        <th className="px-6 py-3">BName</th>
+                                        <th className="px-6 py-3">BReceive</th>
+                                        <th className="px-6 py-3">BUpdate</th>
+                                        <th className="px-6 py-3">TName</th>
+                                        <th className="px-6 py-3 text-right">Processed At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {transactions.map((transaction, index) => (
+                                        <tr key={index} className="bg-white border-b dark:bg-gray-200 dark:border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-300">
+                                            <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-gray-800">{transaction.BName}</td>
+                                            <td className="px-6 py-4">{transaction.BReceive}</td>
+                                            <td className="px-6 py-4">{transaction.BUpdate}</td>
+                                            <td className="px-6 py-4">{transaction.TName}</td>
+                                            <td className="px-6 py-4 text-right">{transaction.ProcessedAt}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
-                    {loading ? (
-                        <></>
-                    ) : (
-                        broadcasts.map(broadcast => (
-                            <div key={broadcast.BID} className="mx-4 my-4">
-                                <div className="flex justify-between mx-auto p-4 border border-gray-300 rounded-md">
-                                    <div className='flex'>
-                                        <FaFileAlt className="h-8 my-3 ml-2 mr-4"/>
-                                        <div>
-                                            <h2 className="font-bold text-violet-700">{broadcast.BName}</h2>
-                                            <p>
-                                                Tag: {broadcast.BTag}<br />
-                                                Created by: {broadcast.BUpdate}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className='absolute left-1/2'>
-                                        <span className='bg-gray-200 py-2 px-3 rounded-lg text-xs'>{broadcast.BStatus}</span>
-                                    </div>
-                                    <div>
-                                        {broadcast.BStatus === 'Draft' || broadcast.BStatus === 'Schedule' ? (
-                                            <button className="rounded-md h-10 text-sm text-white p-2 bg-red-700 items-center">
-                                                Massage Send Error
-                                            </button>
-                                        ) : (
-                                            <button className="rounded-md h-10 text-sm text-white p-2 bg-green-700  items-center">
-                                                Message send successfully
-                                            </button>
-                                        )}
-                                        <button className="rounded-md h-10 text-sm p-2 border-2 mx-2 items-center">
-                                            <BsThreeDots />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    )}
                 </section>
                 <footer className='ml-64 flex justify-center mt-8 my-8'>
                     <Pagination
                         isCompact 
                         showControls 
                         className=''
-                        total={totalPages}
-                        initialPage={currentPage}
-                        onChange={handlePaginationChange}
                     />
                 </footer>
-
             </div>
         </div>
     );

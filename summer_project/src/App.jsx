@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/LoginPages/Login";
 import Register from "./Pages/LoginPages/Register";
 import Broadcast from "./Pages/Broadcasts/Broadcast";
@@ -19,15 +19,6 @@ import BCCContentDetail from "./Pages/Broadcasts/Content/BCContentDetail";
 import Transection from "./Pages/Transection/Transection";
 
 function App() {
-  const ProtectedRoutes = ({ children }) => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      return <Navigate to="/login" />;
-    }
-    
-    return children;
-  };
 
   
 
@@ -36,32 +27,21 @@ function App() {
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
-
-        {/* Wrap all protected routes in the ProtectedRoutes component */}
-        <Route
-          path="*"
-          element={
-            <ProtectedRoutes>
-              <Routes>
-                <Route path="/" element={<Broadcast />} />
-                <Route path="DetailAndEditAdmin" element={<DetailAndEditAdmin />} />
-                <Route path="/AdminEdit" element={<AdminEdit />} />
-                <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
-                <Route path="/Admin" element={<Admin />} />
-                <Route path="template/create" element={<TemplateCreate />} />
-                <Route path="/template/edit/:TID" element={<UpdateTemplate />} />
-                <Route path="/template" element={<Template />} />
-                <Route path="test" element={<TestingGround />} />
-                <Route path="create-broadcast" element={<CtrBroadcast />} />
-                <Route path="create-broadcast/createtemplate/:TID" element={<BCCContentDetail />} />
-                <Route path="customers" element={<Customer />} />
-                <Route path="customer/edit/:CusID" element={<CustomerEdit />} />
-                <Route path="customer/add" element={<AddNewCustomer />} />
-                <Route path="transection" element={<Transection />} />
-              </Routes>
-            </ProtectedRoutes>
-          }
-        />
+        <Route path="/" element={<Broadcast />} />
+        <Route path="DetailAndEditAdmin" element={<DetailAndEditAdmin />} />
+        <Route path="/AdminEdit" element={<AdminEdit />} />
+        <Route path="/AddNewAdmin" element={<AddNewAdmin />} />
+        <Route path="/Admin" element={<Admin />} />
+        <Route path="template/create" element={<TemplateCreate />} />
+        <Route path="/template/edit/:TID" element={<UpdateTemplate />} />
+        <Route path="/template" element={<Template />} />
+        <Route path="test" element={<TestingGround />} />
+        <Route path="create-broadcast" element={<CtrBroadcast />} />
+        <Route path="create-broadcast/createtemplate/:TID" element={<BCCContentDetail />} />
+        <Route path="customers" element={<Customer />} />
+        <Route path="customer/edit/:CusID" element={<CustomerEdit />} />
+        <Route path="customer/add" element={<AddNewCustomer />} />
+        <Route path="transection" element={<Transection />} />
       </Routes>
     </div>
   );

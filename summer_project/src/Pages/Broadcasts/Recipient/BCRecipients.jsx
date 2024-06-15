@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Popover, PopoverTrigger, Button } from "@nextui-org/react";
 import Select from "react-select";
 
-const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, email ,setTag, tag , setEmail, blacklist, setBlacklist }) => {
+const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, email ,setTag, tag , setEmail, blacklist, setBlacklist, setRecipientEveryone }) => {
   const [isMatchConOpen, setIsMatchConOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(email ? "email" : selectedLevel ? "level" : null);
   const [isEveryCustomerOpen, setIsEveryCustomerOpen] = useState(false);
@@ -49,6 +49,7 @@ const BCRecipients = ({ setRecipientTitle, selectedLevel, setSelectedLevel, emai
     setSelectedOption(null);
     setSelectedLevel(null); // Clear the level if every customer
     setEmail(""); // Clear the email input
+    setRecipientEveryone("Everyone"); // Set recipient value to Everyone
   };
 
   const handlePeopleMatchingConditionsClick = () => {

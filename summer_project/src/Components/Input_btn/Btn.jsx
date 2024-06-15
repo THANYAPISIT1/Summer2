@@ -1,7 +1,9 @@
 import axios from 'axios'; // Import Axios
+import { useNavigate } from 'react-router-dom';
 
 function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastName, email, selectedLevel , selectedTID, tag, blacklist, sqlDate, fromName }) {
   console.log(broadcastName, email, selectedLevel , selectedTID, tag,)
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
 
@@ -16,7 +18,8 @@ function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastNa
           BTag: tag,
           BFrom: fromName, // get BFrom
           BRecipient: email || (selectedLevel ? selectedLevel.value : null),
-          TID: selectedTID
+          TID: selectedTID,
+          blacklist: blacklist || '' 
 
         },
         {
@@ -26,10 +29,12 @@ function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastNa
         }
       );
       console.log('Response:', response);
+      navigate('/');
 
     } catch (error) {
       console.error('Error creating broadcast:', error);
     }
+
   };
 
   return (
