@@ -31,7 +31,7 @@ function AddNewCustomer() {
 
     try {
       const response = await axios.post(
-        'http://localhost:8000/customers',
+        'http://178.128.48.196:8000/customers',
         {
           CusName: name,
           CusEmail: email,

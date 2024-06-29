@@ -3,6 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Sidebar from "../../Components/Layouts/Sidebar";
 import TopNav from "../../Components/Layouts/TopNav";
+import { Pagination } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
+
 
 const Template = () => {
   const [templates, setTemplates] = useState([]);
@@ -17,7 +20,7 @@ const Template = () => {
       try {
         const authToken = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:8000/templates?page=${currentPage}`,
+          `http://178.128.48.196:8000/templates?page=${currentPage}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,
@@ -46,17 +49,9 @@ const Template = () => {
     });
   };
 
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  const handlePaginationChange = (page) => {
+    setCurrentPage(page);
+};
 
   return (
     <div>
@@ -75,45 +70,33 @@ const Template = () => {
             </div>
             <div className="flex content-center p-2">
               <div>
-                <button className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-5 py-2.5 text-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 rounded-full">
+                <Button color="primary" variant="ghost">
                   <Link to="/template/create">Create new template</Link>
-                </button>
+                </Button>
               </div>
             </div>
           </div>
           <div className="border border-gray-200 ml-64"></div>
-          <div className="ml-64 flex flex-wrap">
+          <div className="ml-64 flex flex-wrap columns-5 place-content-center">
             {templates.map((template) => (
               <div
                 key={template.TID}
-                className="flex-none m-14 text-cyan-700 hover:text-white border-cyan-700 hover:bg-cyan-800 focus:ring-4 focus:outline-none box-border p-10 border-4 rounded-lg"
+                className="mx-5 w-64 my-4 text-center text-cyan-700 hover:text-white border-cyan-700 hover:bg-cyan-700 focus:ring-4 focus:outline-none box-border p-10 border-4 rounded-lg"
                 onClick={() => handleTemplateClick(template.TID)}
               >
                 {template.TName}
               </div>
             ))}
           </div>
-          <div className="ml-64">
-            <div className="border-b border-gray-200"></div>
-            <div className="flex justify-between items-center p-4">
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ width: "100px", height: "50px" }}
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-              >
-                Prev
-              </button>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ width: "100px", height: "50px" }}
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-              >
-                Next
-              </button>
-            </div>
-          </div>
+          <footer className='ml-64 flex justify-center mt-8 my-8'>
+            <Pagination
+                isCompact
+                showControls
+                total={totalPages}
+                page={currentPage}
+                onChange={handlePaginationChange}
+            />
+          </footer>
         </div>
       </div>
     </div>

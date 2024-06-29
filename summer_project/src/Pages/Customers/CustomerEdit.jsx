@@ -88,7 +88,7 @@ function CustomerEdit() {
   const handleDelete = async () => {
     try {
       const authToken = localStorage.getItem('token');
-      await axios.put(`http://localhost:8000/customers/delete/${CusID}`, null, {
+      await axios.put(`http://178.128.48.196:8000/customers/delete/${CusID}`, null, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
       navigate("/customers");

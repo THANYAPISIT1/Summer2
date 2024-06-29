@@ -4,10 +4,12 @@ import Sidebar from '../../Components/Layouts/Sidebar';
 import TopNav from '../../Components/Layouts/TopNav';
 import { FaFileAlt } from "react-icons/fa";
 import Filter from '../../Components/BCList/Filter';
-import Createbtn from '../../Components/BCList/Createbtn';
+// import Createbtn from '../../Components/BCList/Createbtn';
 import { Link } from 'react-router-dom';
 import { BsThreeDots } from "react-icons/bs";
 import { Pagination } from "@nextui-org/react";
+import { Button } from "@nextui-org/button";
+
 
 const Broadcast = () => {
     const [broadcasts, setBroadcasts] = useState([]);
@@ -51,7 +53,7 @@ const Broadcast = () => {
                 params.filter = selectedFilter.value;
             }
 
-            const response = await axios.get('http://localhost:8000/broadcasts', {
+            const response = await axios.get('http://178.128.48.196:8000/broadcasts', {
                 headers: {
                     'Authorization': `Bearer ${authToken}`
                 },
@@ -125,10 +127,13 @@ const Broadcast = () => {
             <Sidebar />  
             <div className='mt-16'>
                 <section className="ml-64">
-                    <header className='flex justify-between static'>
+                    <header className='flex justify-between static items-center text-center'>
                         <div className="text-xl p-8 font-bold">Broadcast</div>
                         <Link to='/create-broadcast' className='mt-4'>
-                            <Createbtn className='mr-4 border mt-8 h-10 items-center w-40 p-2 rounded-md text-blue-600 hover:bg-blue-500 hover:text-white' />
+                            {/* <Createbtn className='mr-4 border mt-8 h-10 items-center w-40 p-2 rounded-md text-blue-600 hover:bg-blue-500 hover:text-white' /> */}
+                            <Button color="primary" variant="ghost" className="mr-4">
+                                Add new customer
+                            </Button>
                         </Link>
                     </header>
                     <hr />

@@ -32,7 +32,7 @@ const LoginForm = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/login', { AUsername, APassword });
+            const response = await axios.post('http://178.128.48.196:8000/login', { AUsername, APassword });
             
             localStorage.setItem('token', response.data.token);
         

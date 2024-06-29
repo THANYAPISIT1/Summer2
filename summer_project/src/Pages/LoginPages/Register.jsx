@@ -39,7 +39,7 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/register', formData);
+            const response = await axios.post('http://178.128.48.196:8000/register', formData);
             
             console.log(response.data);
 

@@ -36,7 +36,7 @@ const TemplateCreate = () => {
         TContent: data.editorData 
       };
 
-      const response = await axios.post("http://localhost:8000/templates", postData, {
+      const response = await axios.post("http://178.128.48.196:8000/templates", postData, {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }

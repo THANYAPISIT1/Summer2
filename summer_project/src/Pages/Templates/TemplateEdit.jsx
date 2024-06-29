@@ -21,7 +21,7 @@ const UpdateTemplate = () => {
       try {
         const authToken = localStorage.getItem("token");
         const response = await axios.get(
-          `http://localhost:8000/templates/${TID}`,
+          `http://178.128.48.196:8000/templates/${TID}`,
           {
             headers: {
               Authorization: `Bearer ${authToken}`,

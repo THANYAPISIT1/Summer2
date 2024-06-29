@@ -1,20 +1,20 @@
 import axios from 'axios'; // Import Axios
 import { useNavigate } from 'react-router-dom';
 
-function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastName, email, selectedLevel , selectedTID, tag, blacklist, sqlDate, fromName }) {
+function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastName, email, selectedLevel , selectedTID, tag, blacklist, sqlDate, fromName,recipientEveryone }) {
   console.log(broadcastName, email, selectedLevel , selectedTID, tag,)
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
 
     const authToken = localStorage.getItem('token'); // Retrieve the token from localStorage
-
+    
     try {
       const response = await axios.post(
-        'http://localhost:8000/broadcasts',
+        'http://178.128.48.196:8000/broadcasts',
         {
           BName: broadcastName,
-          BSchedule: sqlDate, // get BSchedule
+          BSchedule: sqlDate || '', // get BSchedule
           BTag: tag,
           BFrom: fromName, // get BFrom
           BRecipient: email || (selectedLevel ? selectedLevel.value : null),
@@ -34,6 +34,7 @@ function Btn({ handleNext, handlePrevious, currentIndex, totalSteps, broadcastNa
     } catch (error) {
       console.error('Error creating broadcast:', error);
     }
+
 
   };
 

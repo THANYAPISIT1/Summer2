@@ -61,7 +61,18 @@ const CtrBroadcast = () => {
           setBlacklist={setBlacklist}
           setRecipientEveryone={setRecipientEveryone}
         />,
-        <BCContent setContentName={setContentName} setSelectedTemplate={setSelectedTemplate} />,
+        <BCContent 
+            setContentName={setContentName} 
+            setSelectedTemplate={setSelectedTemplate} 
+            email={email}
+            tag={tag}
+            blacklist={blacklist}
+            selectedLevel={selectedLevel}
+            broadcastName={broadcastName}
+            sqlDate={sqlDate}
+            fromName={fromName}
+            recipientEveryone={recipientEveryone}
+        />,
         <BCReview
             recipientTitle={recipientTitle}
             selectedLevel={selectedLevel}
@@ -70,6 +81,7 @@ const CtrBroadcast = () => {
             selectedTID={selectedTID}
             selectedTName={selectedTName}
             onDateChange={handleDateChange}
+            recipientEveryone={recipientEveryone}
         />,      
     ];
     const [currentIndex, setCurrentIndex] = useState(0);

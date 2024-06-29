@@ -8,9 +8,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
 
 
-const BCReview = ({ recipientTitle, contentName, onDateChange }) => {
+const BCReview = ({ recipientTitle, contentName, onDateChange, recipientEveryone }) => {
   const [bschedule, setBSchedule] = useState(new Date());
   const [sqlDate, setSqlDate] = useState("");
+
+
+  console.log(recipientEveryone);
 
   useEffect(() => {
     const toSqlDate = (date) => {

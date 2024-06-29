@@ -27,7 +27,7 @@ const Filter = ({ onStatusChange, onTagChange, onFilterChange, onDateRangeChange
     try {
       const authToken = localStorage.getItem('token');
 
-      const response = await axios.get('http://localhost:8000/filtertags', {
+      const response = await axios.get('http://178.128.48.196:8000/filtertags', {
         headers: {
           'Authorization': `Bearer ${authToken}`,
         },

@@ -12,13 +12,13 @@ const Customer = () => {
   const [customers, setCustomers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [selectedTags, setSelectedTags] = useState([]); // Add state for selected tags
+  const [selectedTags, setSelectedTags] = useState([]); 
 
   const fetchCustomers = async (page, tags) => {
     try {
       const authToken = localStorage.getItem('token');
       const tagsQuery = tags.length > 0 ? `&selectedLevel=${tags.map(tag => tag.value).join(',')}` : '';
-      const response = await axios.get(`http://localhost:8000/customers?page=${page}${tagsQuery}`, {
+      const response = await axios.get(`http://178.128.48.196:8000/customers?page=${page}${tagsQuery}`, {
         headers: {
           'Authorization': `Bearer ${authToken}`
         }
@@ -68,7 +68,7 @@ const Customer = () => {
 
   const handleTagChange = (selectedOptions) => {
     setSelectedTags(selectedOptions || []);
-    setCurrentPage(1); // Reset to page 1 whenever tags are changed
+    setCurrentPage(1);
   };
 
   return (
@@ -86,7 +86,7 @@ const Customer = () => {
         </header>
         <div className="border-b border-gray-200 mb-8">
           <Select
-            placeholder={<div>Select Tags</div>}
+            placeholder={<div>Filter level</div>}
             options={tags}
             isMulti
             className="basic-multi-select my-4 w-full max-w-64 mx-4"

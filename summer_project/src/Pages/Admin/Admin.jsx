@@ -18,7 +18,7 @@ const Admin = () => {
       setLoading(true);
       try {
         const authToken = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:8000/admins?page=${page}`, {
+        const response = await axios.get(`http://178.128.48.196:8000/admins?page=${page}`, {
           headers: {
             'authorization': `Bearer ${authToken}`
           }
